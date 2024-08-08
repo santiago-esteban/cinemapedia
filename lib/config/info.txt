@@ -1,0 +1,11 @@
+INFORMACIÓN DE LOS DIRECTORIOS Y CLASES
+
+
+
+config: Configuración de la aplicación.
+
+  constants: Este directorio contiene las variables de entorno.
+
+  router: Este directorio contiene el sistema de configuración de rutas.
+
+  theme: Este directorio contiene el tema de la aplicación.

@@ -1,0 +1,14 @@
+INFORMACIÓN DE LOS DIRECTORIOS Y CLASES
+
+
+
+domain: Reglas de la aplicación.
+
+  datasources: En este directorio se definen las reglas que una fuente de información debe de tener para poder utilizarla en la aplicación.
+               (Aquí no está el código que cumple con la funcionalidad de obtener los datos).
+
+  entities: Las clases raíz a partir de las cuales se crean las clases que se utilizan en la aplicación.
+            (Generalmente es la representación de un objeto de la vida real, usado para referirse a tablas en una base de datos)
+
+  repositories: Se llama al repositorio para acceder al datasource, este directorio facilita el mantenimiento de los datasources.
+                (Aquí no está el código que cumple con la funcionalidad de obtener los datos).

@@ -1,0 +1,17 @@
+ARQUITECTURA - CONCEPTOS IMPORTANTES
+
+
+
+Entities / Entidades: Objetos que son y serán idénticos entre diferentes aplicaciones.
+
+Datasources / Orígenes de Datos: Son las fuentes de datos, a la aplicación no le debe de importar de dónde vienen los datos.
+    Abstractos: Contiene las reglas de negocio que todas las implementaciones deben de seguir.
+    Implementaciones: Contiene el código que llama a la API.
+
+Repositories / Repositorios: Llaman a los datasources, deben de ser flexibles para poder modificarlos/cambiarlos sin afectar a la aplicación.
+                             (Reciben uno/varios datasources como argumentos/parámetros).
+    Abstractos: Interfaces o clases base que definen las operaciones generales de los repositorios, estandarizando su comportamiento.
+    Implementaciones: Implementan las abstracciones, conteniendo el código específico para interactuar con los datasources.
+
+Provider / Gestor de Estado: Sirve de puente entre la presentación y los repositorios.
+                             (También realizan los cambios visuales en los Widgets).

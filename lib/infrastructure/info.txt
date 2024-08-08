@@ -1,0 +1,15 @@
+INFORMACIÓN DE LOS DIRECTORIOS Y CLASES
+
+
+
+infrastructure: Infraestructura de la aplicación.
+
+  datasources: Las implementaciones de los datasources, aquí se realizan las peticiones HTTP para obtener la información.
+
+  mappers: El mapper recibe los datos y los transforma al formato que la aplicación necesita para utilizarlos.
+           (En caso de que la API cambie, solo se necesitan cambiar los mappers).
+
+  models: Tienen el objetivo de tipar una respuesta HTTP, ayuda a hacer lucir de cierta manera la información que se recibe de la API.
+          (Es la representación de la entidad y sirve para trabajar fácilmente con el mapper).
+
+  repositories: Las implementaciones de los repositorios, el repositorio recibe los datos del datasource.
