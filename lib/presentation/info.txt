@@ -5,6 +5,8 @@ INFORMACIÓN DE LOS DIRECTORIOS Y CLASES
 presentation: Capa de presentación de la aplicación.
 
   providers: Son el puente de conexión entre las capas de la infraestructura y la capa de presentación. (Los widgets deben de interactuar con el/los providers para que estos interactuen con el usuario final).
+      movies: Directorio que contiene los gestores de estado de las películas.
+          movies_repository_provider.dart: Es un proveedor de Riverpod que crea e inicializa una instancia de MovieRepositoryImpl usando MovieDatasourceImpl.
 
   screens: Este directorio contiene las pantallas de la aplicación.
       movies: Directorio que contiene las pantallas de las películas.
