@@ -15,7 +15,7 @@ class MovieMapper {
         popularity: moviedb.popularity,
         posterPath: (moviedb.posterPath != '')
             ? 'https://image.tmdb.org/t/p/w500/${moviedb.posterPath}'
-            : 'https://img.freepik.com/free-vector/young-woman-protesting-with-round-banner-meeting-stop-attention-flat-vector-illustration-demonstration-active-position-concept-mobile-app-template_74855-12669.jpg?size=626&ext=jpg',
+            : 'no-poster',
         releaseDate: moviedb.releaseDate,
         title: moviedb.title,
         video: moviedb.video,
