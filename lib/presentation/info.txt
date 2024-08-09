@@ -6,6 +6,7 @@ presentation: Capa de presentación de la aplicación.
 
   providers: Son el puente de conexión entre las capas de la infraestructura y la capa de presentación. (Los widgets deben de interactuar con el/los providers para que estos interactuen con el usuario final).
       movies: Directorio que contiene los gestores de estado de las películas.
+          movies_providers.dart: El nowPlayingMoviesProvider es un proveedor de Riverpod que utiliza MoviesNotifier para gestionar y actualizar una lista de películas en cartelera, cargando nuevas películas de manera paginada.
           movies_repository_provider.dart: Es un proveedor de Riverpod que crea e inicializa una instancia de MovieRepositoryImpl usando MovieDatasourceImpl.
 
   screens: Este directorio contiene las pantallas de la aplicación.
