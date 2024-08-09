@@ -4,8 +4,14 @@ INFORMACIÓN DE LOS DIRECTORIOS Y CLASES
 
 config: Configuración de la aplicación.
 
+
   constants: Este directorio contiene las variables de entorno.
+      environment.dart: Contiene las variables de entorno del archivo (.env).
+
 
   router: Este directorio contiene el sistema de configuración de rutas.
+      app_router.dart: Contiene las rutas de la aplicación, se utiliza la libreria externa (go_router).
+
 
   theme: Este directorio contiene el tema de la aplicación.
+      app_theme.dart: Contiene el tema de la aplicación.

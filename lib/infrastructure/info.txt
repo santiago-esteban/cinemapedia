@@ -5,11 +5,18 @@ INFORMACIÓN DE LOS DIRECTORIOS Y CLASES
 infrastructure: Infraestructura de la aplicación.
 
   datasources: Las implementaciones de los datasources, aquí se realizan las peticiones HTTP para obtener la información.
+      moviedb_datasource.dart: Contiene el código que interactúa con TheMovieDB (TMDB), es la implementación de (movies_datasource.dart).
 
-  mappers: El mapper recibe los datos y los transforma al formato que la aplicación necesita para utilizarlos.
-           (En caso de que la API cambie, solo se necesitan cambiar los mappers).
+  mappers: El mapper recibe los datos y los transforma al formato que la aplicación necesita para utilizarlos. (En caso de que la API cambie, solo se necesitan cambiar los mappers).
+      movie_mapper.dart: Convierte objetos de tipo MovieMovieDB en objetos Movie para adaptarlos al formato utilizado en la aplicación.
+                         Este mapeo incluye ajustes en las URLs de las imágenes y la conversión de los IDs de géneros a cadenas de texto.
 
-  models: Tienen el objetivo de tipar una respuesta HTTP, ayuda a hacer lucir de cierta manera la información que se recibe de la API.
-          (Es la representación de la entidad y sirve para trabajar fácilmente con el mapper).
+  models: Tienen el objetivo de tipar una respuesta HTTP, ayuda a hacer lucir de cierta manera la información que se recibe de la API. (Es la representación de la entidad y sirve para trabajar fácilmente con el mapper).
+      moviedb: Directorio que contiene los modelos de TheMovieDB (TMDB).
+          movie_moviedb.dart: Representa los datos de una película obtenida de la API de TheMovieDB (TMDB). Incluye atributos como el título, fecha de lanzamiento, sinopsis, y otros detalles relevantes.
+                              Además, tiene métodos para convertir datos JSON en una instancia de la clase y viceversa, facilitando la serialización y deserialización de datos de películas.
+          moviedb_response.dart: Representa la respuesta de una API de películas, conteniendo información sobre paginación y una lista de películas (results).
+                                 También incluye un rango de fechas (Dates) para los lanzamientos de películas. Los métodos permiten convertir los datos de JSON a objetos de estas clases y viceversa.
+                                 La clase Dates maneja las fechas mínima y máxima del rango de lanzamiento de las películas en la respuesta.
 
   repositories: Las implementaciones de los repositorios, el repositorio recibe los datos del datasource.
