@@ -5,7 +5,8 @@ INFORMACIÓN DE LOS DIRECTORIOS Y CLASES
 infrastructure: Infraestructura de la aplicación.
 
   datasources: Las implementaciones de los datasources, aquí se realizan las peticiones HTTP para obtener la información.
-      moviedb_datasource.dart: Contiene el código que interactúa con TheMovieDB (TMDB), es la implementación de (movies_datasource.dart).
+      movie_datasource_impl.dart: Se conecta a la API de TheMovieDB (TMDB) para obtener películas en cartelera.
+                               Utiliza Dio para hacer la solicitud HTTP, filtra las películas sin póster, y convierte los datos en objetos Movie usando MovieMapper, devolviendo una lista de películas.
 
   mappers: El mapper recibe los datos y los transforma al formato que la aplicación necesita para utilizarlos. (En caso de que la API cambie, solo se necesitan cambiar los mappers).
       movie_mapper.dart: Convierte objetos de tipo MovieMovieDB en objetos Movie para adaptarlos al formato utilizado en la aplicación.
@@ -20,3 +21,5 @@ infrastructure: Infraestructura de la aplicación.
                                  La clase Dates maneja las fechas mínima y máxima del rango de lanzamiento de las películas en la respuesta.
 
   repositories: Las implementaciones de los repositorios, el repositorio recibe los datos del datasource.
+      movie_repository_impl.dart: Es una implementación de MoviesRepository que utiliza un MoviesDatasource para obtener datos de películas.
+                                  Su función principal es delegar la solicitud de películas en cartelera al datasource, devolviendo los resultados como una lista de objetos Movie.
