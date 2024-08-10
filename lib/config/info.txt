@@ -8,6 +8,8 @@ config: Configuración de la aplicación.
   constants: Este directorio contiene las variables de entorno.
       environment.dart: Contiene las variables de entorno del archivo (.env).
 
+  helpers: Este directorio contiene ayudas para el código.
+      human_format.dart: Contiene conversiones de decimales utilizando el paquete (intl).
 
   router: Este directorio contiene el sistema de configuración de rutas.
       app_router.dart: Contiene las rutas de la aplicación, se utiliza la libreria externa (go_router).
