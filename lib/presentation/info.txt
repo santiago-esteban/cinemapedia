@@ -18,6 +18,7 @@ presentation: Capa de presentación de la aplicación.
 
   widgets: Este directorio contiene los widgets personalizados de la aplicación.
       movies: Este directorio contiene los widgets específicos de las pantallas de las películas.
+          movies_listwiew.dart: Este widget representa el deslizador de tarjetas horizontal de las peliculas "En cines".
           movies_slideshow.dart: Este widget representa el deslizador de tarjetas, utiliza la librería externa (card_swiper)
       shared: Este directorio contiene los widgets genéricos que se utilizan en toda la aplicación.
           custom_appbar.dart: Este widget representa la barra superior de la aplicación.
