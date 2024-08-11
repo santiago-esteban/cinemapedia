@@ -15,6 +15,7 @@ presentation: Capa de presentación de la aplicación.
   screens: Este directorio contiene las pantallas de la aplicación.
       movies: Directorio que contiene las pantallas de las películas.
           home_screen.dart: La pantalla principal de las películas.
+          movie_screen: La pantalla de cada película individual.
       screens.dart: Contiene las exportaciones de todas las pantallas de la aplicación. (Archivo de barril)
 
   widgets: Este directorio contiene los widgets personalizados de la aplicación.
