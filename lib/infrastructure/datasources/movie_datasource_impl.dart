@@ -4,7 +4,6 @@ import 'package:cinemapedia/domain/datasources/movies_datasource.dart';
 import 'package:cinemapedia/domain/entities/movie.dart';
 import 'package:cinemapedia/infrastructure/models/models.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 
 class MovieDatasourceImpl extends MoviesDatasource {
   final dio = Dio(
