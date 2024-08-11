@@ -5,7 +5,11 @@ INFORMACIÓN DE LOS DIRECTORIOS Y CLASES
 presentation: Capa de presentación de la aplicación.
 
   providers: Son el puente de conexión entre las capas de la infraestructura y la capa de presentación. (Los widgets deben de interactuar con el/los providers para que estos interactuen con el usuario final).
-      movies: Directorio que contiene los gestores de estado de las películas.
+      actors: Directorio que contiene las conexiones entre la infraestructura y la presentación de los actores.
+          actors_movie_provider.dart: Gestiona un mapa de actores por película. La clase ActorsMovieProvider obtiene actores para una película específica usando un callback (getActors) y actualiza el estado si aún no se han cargado.
+                                      El proveedor se conecta al repositorio de actores y permite acceder a la lista de actores por película.
+          actors_repository_provider.dart: Usando Riverpod, proporciona una instancia de ActorRepositoryImpl, que a su vez utiliza ActorDatasourceImpl para obtener datos de actores desde la API.
+      movies: Directorio que contiene las conexiones entre la infraestructura y la presentación de las películas.
           first_loading_provider.dart: Indica si alguna de las listas de películas principales aún está vacía, retornando true si es así, o false si todas están cargadas.
           movie_details_provider.dart: Gestiona un mapa de películas en el estado. Permite cargar detalles de una película a partir de su ID usando un callback proporcionado, y actualiza el estado si la película no está ya presente.
           movies_providers.dart: El nowPlayingMoviesProvider es un proveedor de Riverpod que utiliza MoviesNotifier para gestionar y actualizar una lista de películas en cartelera, cargando nuevas películas de manera paginada.
