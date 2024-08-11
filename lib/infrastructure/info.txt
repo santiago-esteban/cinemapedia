@@ -5,15 +5,20 @@ INFORMACIÓN DE LOS DIRECTORIOS Y CLASES
 infrastructure: Infraestructura de la aplicación.
 
   datasources: Las implementaciones de los datasources, aquí se realizan las peticiones HTTP para obtener la información.
+      actor_datasource_impl.dart: Obtiene actores de una película desde la API de TMDB, convierte los datos en objetos Actor usando ActorMapper, y devuelve una lista de actores asociados con la película.
       movie_datasource_impl.dart: Se conecta a la API de TheMovieDB (TMDB) para obtener películas en cartelera.
                                Utiliza Dio para hacer la solicitud HTTP, filtra las películas sin póster, y convierte los datos en objetos Movie usando MovieMapper, devolviendo una lista de películas.
 
   mappers: El mapper recibe los datos y los transforma al formato que la aplicación necesita para utilizarlos. (En caso de que la API cambie, solo se necesitan cambiar los mappers).
+      actor_mapper.dart: Convierte un objeto Cast (del modelo de datos de la API) en un objeto Actor (de la entidad de dominio). Si el actor tiene una imagen de perfil (profilePath), se construye la URL completa;
       movie_mapper.dart: Convierte objetos de tipo MovieMovieDB en objetos Movie para adaptarlos al formato utilizado en la aplicación.
                          Este mapeo incluye ajustes en las URLs de las imágenes y la conversión de los IDs de géneros a cadenas de texto.
 
   models: Tienen el objetivo de tipar una respuesta HTTP, ayuda a hacer lucir de cierta manera la información que se recibe de la API. (Es la representación de la entidad y sirve para trabajar fácilmente con el mapper).
       moviedb: Directorio que contiene los modelos de TheMovieDB (TMDB).
+          credits_response.dart: El programa define dos clases:
+                                 CreditsResponse: Maneja los créditos de una película, con un ID y listas de actores (cast) y equipo técnico (crew).
+                                 Cast: Representa a una persona del reparto o equipo, con detalles como nombre, departamento y rol. Ambas clases incluyen métodos para convertir entre JSON y objetos.
           movie_details.dart: Es una representación detallada de una película. Esta clase contiene varias propiedades que describen los distintos aspectos de una película, como su título, género...
           movie_moviedb.dart: Representa los datos de una película obtenida de la API de TheMovieDB (TMDB). Incluye atributos como el título, fecha de lanzamiento, sinopsis, y otros detalles relevantes.
                               Además, tiene métodos para convertir datos JSON en una instancia de la clase y viceversa, facilitando la serialización y deserialización de datos de películas.
@@ -23,5 +28,7 @@ infrastructure: Infraestructura de la aplicación.
       models.dart: Contiene las exportaciones de todos los models de la aplicación. (Archivo de barril)
 
   repositories: Las implementaciones de los repositorios, el repositorio recibe los datos del datasource.
+      actor_datasource_impl.dart: Implementa el repositorio ActorsRepository, delegando la obtención de actores de una película al ActorsDatasource proporcionado.
+                                  Simplemente llama al método getActorByMovie del datasource y devuelve la lista de actores.
       movie_repository_impl.dart: Es una implementación de MoviesRepository que utiliza un MoviesDatasource para obtener datos de películas.
                                   Su función principal es delegar la solicitud de películas en cartelera al datasource, devolviendo los resultados como una lista de objetos Movie.

@@ -6,12 +6,13 @@ domain: Reglas de la aplicación.
 
 
   datasources: En este directorio se definen las reglas que una fuente de información debe de tener para poder utilizarla en la aplicación. (Aquí no está el código que cumple con la funcionalidad de obtener los datos).
-      movies_datasource.dart: Contiene las reglas que debe de cumplir (moviedb_datasource.dart)
-
+      actors_datasource.dart: Contiene las reglas que debe de cumplir (actor_datasource_impl.dart).
+      movies_datasource.dart: Contiene las reglas que debe de cumplir (movie_datasource_impl.dart).
 
   entities: Las clases raíz a partir de las cuales se crean las clases que se utilizan en la aplicación. (Generalmente es la representación de un objeto de la vida real, usado para referirse a tablas en una base de datos)
+      actor.dart: Define el formato que se utilizará para los actores en la aplicación. El mapper emplea esta clase para transformar los datos y adaptarlos al formato esperado por esta clase.
       movie.dart: Define el formato que se utilizará para las películas en la aplicación. El mapper emplea esta clase para transformar los datos y adaptarlos al formato esperado por esta clase.
 
-
   repositories: Se llama al repositorio para acceder al datasource, este directorio facilita el mantenimiento de los datasources. (Aquí no está el código que cumple con la funcionalidad de obtener los datos).
+      actors_repository.dart: Desde este repositorio se accede a (actors_datasource.dart) para obtener y utilizar las reglas definidas en este archivo.
       movies_repository.dart: Desde este repositorio se accede a (movies_datasource.dart) para obtener y utilizar las reglas definidas en este archivo.
