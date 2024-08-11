@@ -30,8 +30,7 @@ class _MoviesListviewState extends State<MoviesListview> {
     super.initState();
     scrollController.addListener(() {
       if (widget.loadNextPage == null) return;
-      if ((scrollController.position.pixels + 200) >=
-          scrollController.position.maxScrollExtent) {
+      if ((scrollController.position.pixels + 200) >= scrollController.position.maxScrollExtent) {
         widget.loadNextPage!();
       }
     });
@@ -91,8 +90,7 @@ class _Slide extends StatelessWidget {
                 width: 150,
                 loadingBuilder: (context, child, loadingProgress) {
                   if (loadingProgress != null) {
-                    return const Center(
-                        child: CircularProgressIndicator(strokeWidth: 2));
+                    return const Center(child: CircularProgressIndicator(strokeWidth: 2));
                   }
                   return GestureDetector(
                     onTap: () => context.push('/movie/${movie.id}'),
@@ -121,11 +119,9 @@ class _Slide extends StatelessWidget {
                 Icon(Icons.star_half_outlined, color: Colors.yellow.shade800),
                 const SizedBox(width: 3),
                 Text(HumanFormats.oneDecimalDigits(movie.voteAverage),
-                    style: textStyles.bodyMedium
-                        ?.copyWith(color: Colors.yellow.shade800)),
+                    style: textStyles.bodyMedium?.copyWith(color: Colors.yellow.shade800)),
                 const Spacer(),
-                Text(HumanFormats.ceroDecimalDigits(movie.popularity),
-                    style: textStyles.bodySmall)
+                Text(HumanFormats.ceroDecimalDigits(movie.popularity), style: textStyles.bodySmall)
               ],
             ),
           ),
