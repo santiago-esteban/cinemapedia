@@ -14,11 +14,13 @@ infrastructure: Infraestructura de la aplicación.
 
   models: Tienen el objetivo de tipar una respuesta HTTP, ayuda a hacer lucir de cierta manera la información que se recibe de la API. (Es la representación de la entidad y sirve para trabajar fácilmente con el mapper).
       moviedb: Directorio que contiene los modelos de TheMovieDB (TMDB).
+          movie_details.dart: Es una representación detallada de una película. Esta clase contiene varias propiedades que describen los distintos aspectos de una película, como su título, género...
           movie_moviedb.dart: Representa los datos de una película obtenida de la API de TheMovieDB (TMDB). Incluye atributos como el título, fecha de lanzamiento, sinopsis, y otros detalles relevantes.
                               Además, tiene métodos para convertir datos JSON en una instancia de la clase y viceversa, facilitando la serialización y deserialización de datos de películas.
           moviedb_response.dart: Representa la respuesta de una API de películas, conteniendo información sobre paginación y una lista de películas (results).
                                  También incluye un rango de fechas (Dates) para los lanzamientos de películas. Los métodos permiten convertir los datos de JSON a objetos de estas clases y viceversa.
                                  La clase Dates maneja las fechas mínima y máxima del rango de lanzamiento de las películas en la respuesta.
+      models.dart: Contiene las exportaciones de todos los models de la aplicación. (Archivo de barril)
 
   repositories: Las implementaciones de los repositorios, el repositorio recibe los datos del datasource.
       movie_repository_impl.dart: Es una implementación de MoviesRepository que utiliza un MoviesDatasource para obtener datos de películas.
