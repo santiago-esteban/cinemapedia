@@ -55,35 +55,29 @@ class _HomeViewState extends ConsumerState<_HomeView> {
           delegate: SliverChildBuilderDelegate((context, index) {
             return Column(
               children: [
-                //const CustomAppbar(),
                 MoviesSlideshow(movies: slideShowMovies),
                 MoviesListview(
                   movies: nowPlayingMovies,
                   title: 'En cines',
                   subTitle: 'Sábado 10',
-                  loadNextPage: () => ref
-                      .read(nowPlayingMoviesProvider.notifier)
-                      .loadNextPage(),
+                  loadNextPage: () => ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(),
                 ),
                 MoviesListview(
                   movies: upcomingMovies,
                   title: 'Próximamente',
                   subTitle: 'Este mes',
-                  loadNextPage: () =>
-                      ref.read(upcomingMoviesProvider.notifier).loadNextPage(),
+                  loadNextPage: () => ref.read(upcomingMoviesProvider.notifier).loadNextPage(),
                 ),
                 MoviesListview(
                   movies: popularMovies,
                   title: 'Populares',
-                  loadNextPage: () =>
-                      ref.read(popularMoviesProvider.notifier).loadNextPage(),
+                  loadNextPage: () => ref.read(popularMoviesProvider.notifier).loadNextPage(),
                 ),
                 MoviesListview(
                   movies: topRatedMovies,
                   title: 'Mejor calificadas',
                   subTitle: 'Desde siempre',
-                  loadNextPage: () =>
-                      ref.read(topRatedMoviesProvider.notifier).loadNextPage(),
+                  loadNextPage: () => ref.read(topRatedMoviesProvider.notifier).loadNextPage(),
                 ),
                 const SizedBox(height: 20)
               ],
