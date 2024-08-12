@@ -4,6 +4,9 @@ INFORMACIÓN DE LOS DIRECTORIOS Y CLASES
 
 presentation: Capa de presentación de la aplicación.
 
+  delegates: Este directorio contiene los delegates de la aplicación.
+      search_movie_delegate.dart: Contiene el código del delegate para la búsqueda de peliculas.
+
   providers: Son el puente de conexión entre las capas de la infraestructura y la capa de presentación. (Los widgets deben de interactuar con el/los providers para que estos interactuen con el usuario final).
       actors: Directorio que contiene las conexiones entre la infraestructura y la presentación de los actores.
           actors_movie_provider.dart: Gestiona un mapa de actores por película. La clase ActorsMovieProvider obtiene actores para una película específica usando un callback (getActors) y actualiza el estado si aún no se han cargado.
