@@ -7,7 +7,7 @@ class ActorMapper {
         name: cast.name,
         profilePath: cast.profilePath != null
             ? 'https://image.tmdb.org/t/p/w500/${cast.profilePath}'
-            : 'https://img.freepik.com/free-vector/young-woman-protesting-with-round-banner-meeting-stop-attention-flat-vector-illustration-demonstration-active-position-concept-mobile-app-template_74855-12669.jpg?size=626&ext=jpg',
+            : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxKOYPyF-MeWe6p_HA_AWU0J0nVHhwrQrZFA&usqp=CAU',
         character: cast.character,
       );
 }

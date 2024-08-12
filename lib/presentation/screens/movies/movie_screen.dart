@@ -63,7 +63,7 @@ class _MovieDetails extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //Imagen
+              //*Imagen
               ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Image.network(
@@ -72,7 +72,7 @@ class _MovieDetails extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 10),
-              //Descripción
+              //*Descripción
               SizedBox(
                 width: (size.width - 40) * 0.7,
                 child: Column(

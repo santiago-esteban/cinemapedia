@@ -42,6 +42,7 @@ class _Slide extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //*Decoración
     final decoration = BoxDecoration(
       borderRadius: BorderRadius.circular(20),
       boxShadow: const [
@@ -53,6 +54,7 @@ class _Slide extends StatelessWidget {
       ],
     );
 
+    //*Imagen
     return Padding(
       padding: const EdgeInsets.only(bottom: 30),
       child: DecoratedBox(

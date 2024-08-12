@@ -48,8 +48,7 @@ class _MoviesListviewState extends State<MoviesListview> {
       height: 350,
       child: Column(
         children: [
-          if (widget.title != null || widget.subTitle != null)
-            _Title(title: widget.title, subTitle: widget.subTitle),
+          if (widget.title != null || widget.subTitle != null) _Title(title: widget.title, subTitle: widget.subTitle),
           Expanded(
             child: ListView.builder(
               controller: scrollController,
@@ -118,10 +117,10 @@ class _Slide extends StatelessWidget {
               children: [
                 Icon(Icons.star_half_outlined, color: Colors.yellow.shade800),
                 const SizedBox(width: 3),
-                Text(HumanFormats.oneDecimalDigits(movie.voteAverage),
+                Text(HumanFormats.number(movie.voteAverage, 1),
                     style: textStyles.bodyMedium?.copyWith(color: Colors.yellow.shade800)),
                 const Spacer(),
-                Text(HumanFormats.ceroDecimalDigits(movie.popularity), style: textStyles.bodySmall)
+                Text(HumanFormats.number(movie.popularity), style: textStyles.bodySmall)
               ],
             ),
           ),
