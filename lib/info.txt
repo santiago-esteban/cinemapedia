@@ -17,3 +17,6 @@ Repositories / Repositorios: Llaman a los datasources, deben de ser flexibles pa
 
 Provider / Gestor de Estado: Sirve de puente entre la presentación y los repositorios. (También realizan los cambios visuales en los Widgets).
 
+
+
+LÓGICA DE NEGOCIO: SCREENS > WIDGETS > PROVIDERS > REPOSITORIES > DATASOURCES
