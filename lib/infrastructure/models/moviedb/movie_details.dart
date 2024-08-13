@@ -6,8 +6,8 @@ class MovieDetails {
   final List<Genre> genres;
   final String homepage;
   final int id;
-  final String imdbId;
-  final List<String> originCountry;
+  final String? imdbId;
+  final List<String>? originCountry;
   final String originalLanguage;
   final String originalTitle;
   final String overview;
@@ -58,29 +58,27 @@ class MovieDetails {
   factory MovieDetails.fromJson(Map<String, dynamic> json) => MovieDetails(
         adult: json["adult"],
         backdropPath: json["backdrop_path"] ?? '',
-        belongsToCollection: json["belongs_to_collection"] == null
-            ? null
-            : BelongsToCollection.fromJson(json["belongs_to_collection"]),
+        belongsToCollection:
+            json["belongs_to_collection"] == null ? null : BelongsToCollection.fromJson(json["belongs_to_collection"]),
         budget: json["budget"],
         genres: List<Genre>.from(json["genres"].map((x) => Genre.fromJson(x))),
         homepage: json["homepage"],
         id: json["id"],
-        imdbId: json["imdb_id"],
-        originCountry: List<String>.from(json["origin_country"].map((x) => x)),
+        imdbId: json["imdb_id"] ?? '',
+        originCountry: json["origin_country"] != null ? List<String>.from(json["origin_country"].map((x) => x)) : null,
         originalLanguage: json["original_language"],
         originalTitle: json["original_title"],
         overview: json["overview"],
         popularity: json["popularity"]?.toDouble(),
         posterPath: json["poster_path"],
-        productionCompanies: List<ProductionCompany>.from(
-            json["production_companies"].map((x) => ProductionCompany.fromJson(x))),
-        productionCountries: List<ProductionCountry>.from(
-            json["production_countries"].map((x) => ProductionCountry.fromJson(x))),
+        productionCompanies:
+            List<ProductionCompany>.from(json["production_companies"].map((x) => ProductionCompany.fromJson(x))),
+        productionCountries:
+            List<ProductionCountry>.from(json["production_countries"].map((x) => ProductionCountry.fromJson(x))),
         releaseDate: DateTime.parse(json["release_date"]),
         revenue: json["revenue"],
         runtime: json["runtime"],
-        spokenLanguages: List<SpokenLanguage>.from(
-            json["spoken_languages"].map((x) => SpokenLanguage.fromJson(x))),
+        spokenLanguages: List<SpokenLanguage>.from(json["spoken_languages"].map((x) => SpokenLanguage.fromJson(x))),
         status: json["status"],
         tagline: json["tagline"],
         title: json["title"],
@@ -98,7 +96,7 @@ class MovieDetails {
         "homepage": homepage,
         "id": id,
         "imdb_id": imdbId,
-        "origin_country": List<dynamic>.from(originCountry.map((x) => x)),
+        "origin_country": originCountry != null ? List<dynamic>.from(originCountry!.map((x) => x)) : null,
         "original_language": originalLanguage,
         "original_title": originalTitle,
         "overview": overview,

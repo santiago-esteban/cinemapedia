@@ -1,49 +1,105 @@
+import 'dart:async';
+import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
+import 'package:go_router/go_router.dart';
+
 import 'package:cinemapedia/config/helpers/human_formats.dart';
 import 'package:cinemapedia/domain/entities/movie.dart';
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 typedef SearchMoviesCallBack = Future<List<Movie>> Function(String query);
 
 class SearchMovieDelegate extends SearchDelegate<Movie?> {
   final SearchMoviesCallBack searchMovies;
+  List<Movie> initialMovies;
 
-  SearchMovieDelegate({required this.searchMovies});
+  StreamController<List<Movie>> debouncedMoviesStream = StreamController.broadcast();
+  StreamController<bool> isLoadingStream = StreamController.broadcast();
 
-  @override
-  String get searchFieldLabel => 'Buscar película';
+  Timer? _debouncedTimer;
+
+  SearchMovieDelegate({
+    required this.searchMovies,
+    required this.initialMovies,
+  }) : super(searchFieldLabel: 'Buscar película');
+
+  void _onQueryChanged(String query) {
+    if (query.isNotEmpty) isLoadingStream.add(true);
+    if (_debouncedTimer?.isActive ?? false) {
+      _debouncedTimer!.cancel();
+    }
+    _debouncedTimer = Timer(const Duration(milliseconds: 500), () async {
+      final movies = await searchMovies(query);
+      initialMovies = movies;
+      isLoadingStream.add(false);
+      debouncedMoviesStream.add(movies);
+    });
+  }
 
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
-      FadeIn(
-        animate: query.isNotEmpty,
-        child: IconButton(
-          onPressed: () => query = '',
-          icon: const Icon(Icons.clear),
-        ),
-      )
+      StreamBuilder(
+        stream: isLoadingStream.stream,
+        builder: (context, snapshot) {
+          if (snapshot.data ?? false) {
+            return SpinPerfect(
+              duration: const Duration(seconds: 5),
+              spins: 10,
+              infinite: true,
+              child: IconButton(onPressed: () => query = '', icon: const Icon(Icons.refresh_rounded)),
+            );
+          }
+          return FadeIn(
+            animate: query.isNotEmpty,
+            child: IconButton(
+              onPressed: () => query = '',
+              icon: const Icon(Icons.clear),
+            ),
+          );
+        },
+      ),
     ];
   }
 
   @override
   Widget? buildLeading(BuildContext context) {
     return IconButton(
-      onPressed: () => close(context, null),
+      onPressed: () {
+        close(context, null);
+        _debouncedTimer?.cancel();
+        isLoadingStream.close();
+        debouncedMoviesStream.close();
+      },
       icon: const Icon(Icons.arrow_back_ios_new_rounded),
     );
   }
 
   @override
   Widget buildResults(BuildContext context) {
-    return const Text('Build Results');
+    return _StreamBuilder(initialMovies: initialMovies, debouncedMoviesStream: debouncedMoviesStream);
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return FutureBuilder(
-      future: searchMovies(query),
+    _onQueryChanged(query);
+    return _StreamBuilder(initialMovies: initialMovies, debouncedMoviesStream: debouncedMoviesStream);
+  }
+}
+
+class _StreamBuilder extends StatelessWidget {
+  const _StreamBuilder({
+    required this.initialMovies,
+    required this.debouncedMoviesStream,
+  });
+
+  final List<Movie> initialMovies;
+  final StreamController<List<Movie>> debouncedMoviesStream;
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      initialData: initialMovies,
+      stream: debouncedMoviesStream.stream,
       builder: (context, snapshot) {
         final movies = snapshot.data ?? [];
         return ListView.builder(
