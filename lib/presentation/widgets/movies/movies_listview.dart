@@ -131,7 +131,7 @@ class _SlideCustomWidget extends StatelessWidget {
                     return const Center(child: CircularProgressIndicator(strokeWidth: 2)); // Muestra un indicador de carga mientras la imagen se descarga.
                   }
                   return GestureDetector(
-                    onTap: () => context.push('/movie/${movie.id}'), // Navega a la pantalla de detalles de la película al tocar la imagen.
+                    onTap: () => context.push('/home/0/movie/${movie.id}'), // Navega a la pantalla de detalles de la película al tocar la imagen.
                     child: FadeIn(child: child), // Aplica una animación de desvanecimiento a la imagen.
                   );
                 },

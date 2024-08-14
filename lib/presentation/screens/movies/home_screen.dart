@@ -1,98 +1,34 @@
+import 'package:cinemapedia/presentation/views/views.dart'; // Importa las vistas de la aplicación.
 import 'package:flutter/material.dart'; // Importa los widgets de Flutter.
-import 'package:cinemapedia/config/helpers/human_formats.dart';
 import 'package:cinemapedia/presentation/widgets/widgets.dart'; // Importa los widgets personalizados.
-import 'package:cinemapedia/presentation/providers/providers.dart'; // Importa los proveedores de estado.
-import 'package:flutter_riverpod/flutter_riverpod.dart'; // Importa Riverpod para la gestión del estado.
 
 //* Pantalla principal que muestra la interfaz de inicio de la aplicación.
 class HomeScreen extends StatelessWidget {
-  static const name = 'home-screen'; // Nombre de la ruta para navegación.
+  static const name = 'home-screen'; // Nombre constante para identificar la pantalla.
+  final int pageIndex; // Índice de la página que se debe mostrar.
 
-  const HomeScreen({super.key}); // Constructor con clave opcional.
+  const HomeScreen({
+    super.key,
+    required this.pageIndex, // El índice de la página es requerido al crear una instancia de HomeScreen.
+  });
 
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: _HomeView(), // Cuerpo de la pantalla, que muestra la vista principal.
-      bottomNavigationBar: CustomNavigationBar(), // Barra de navegación personalizada de la parte inferior.
-    );
-  }
-}
-
-//* Vista principal dentro de la pantalla de inicio.
-class _HomeView extends ConsumerStatefulWidget {
-  const _HomeView(); // Constructor.
-
-  @override
-  _HomeViewState createState() => _HomeViewState(); // Crea el estado asociado con esta vista.
-}
-
-//* Estado para manejar la lógica y la interfaz de _HomeView.
-class _HomeViewState extends ConsumerState<_HomeView> {
-  @override
-  void initState() {
-    super.initState();
-    // Carga la primera página de cada lista de películas al inicializar el estado.
-    ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
-    ref.read(upcomingMoviesProvider.notifier).loadNextPage();
-    ref.read(popularMoviesProvider.notifier).loadNextPage();
-    ref.read(topRatedMoviesProvider.notifier).loadNextPage();
-  }
+  //* Lista de vistas que se pueden mostrar en la pantalla de inicio.
+  final viewRoutes = const <Widget>[
+    HomeView(), // Vista principal de inicio.
+    CategoriesView(), // Vista de categorías.
+    FavoritesView(), // Vista de favoritos.
+  ];
 
   @override
   Widget build(BuildContext context) {
-    final firstLoading = ref.watch(firstLoadingProvider); // Verifica si es la primera carga de datos.
-    if (firstLoading) return const FullScreenLoader(); // Muestra un cargador a pantalla completa si los datos aún están cargándose.
-
-    final slideShowMovies = ref.watch(moviesSlideshowProvider); // Obtiene las películas para el carrusel.
-    final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider); // Obtiene las películas actualmente en cartelera.
-    final upcomingMovies = ref.watch(upcomingMoviesProvider); // Obtiene las películas próximas a estrenarse.
-    final popularMovies = ref.watch(popularMoviesProvider); // Obtiene las películas más populares.
-    final topRatedMovies = ref.watch(topRatedMoviesProvider); // Obtiene las películas mejor calificadas.
-
-    return CustomScrollView(
-      slivers: [
-        const SliverAppBar(
-          floating: true, // Mantiene la AppBar flotante.
-          flexibleSpace: CustomAppbar(), // Barra de aplicación personalizada.
-        ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate((context, index) {
-            return Column(
-              children: [
-                //* Carrusel de 6 peliculas
-                MoviesSlideshow(movies: slideShowMovies), // Muestra el carrusel de películas.
-
-                //* Listas de películas "infinitas".
-                MoviesListview(
-                  movies: nowPlayingMovies, // Lista de películas en cartelera.
-                  title: 'En cines',
-                  subTitle: HumanFormats.formatDate(DateTime.now()),
-                  loadNextPage: () => ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(), // Función para cargar más películas al final.
-                ),
-                MoviesListview(
-                  movies: upcomingMovies, // Lista de películas próximas.
-                  title: 'Próximamente',
-                  subTitle: 'Este mes',
-                  loadNextPage: () => ref.read(upcomingMoviesProvider.notifier).loadNextPage(),
-                ),
-                MoviesListview(
-                  movies: popularMovies, // Lista de películas populares.
-                  title: 'Populares',
-                  loadNextPage: () => ref.read(popularMoviesProvider.notifier).loadNextPage(),
-                ),
-                MoviesListview(
-                  movies: topRatedMovies, // Lista de películas mejor calificadas.
-                  title: 'Mejor calificadas',
-                  subTitle: 'Desde siempre',
-                  loadNextPage: () => ref.read(topRatedMoviesProvider.notifier).loadNextPage(),
-                ),
-                const SizedBox(height: 20) // Espaciado al final de la lista.
-              ],
-            );
-          }, childCount: 1),
-        ),
-      ],
+    return Scaffold(
+      //* Cuerpo de la pantalla, que muestra la vista correspondiente al índice actual.
+      body: IndexedStack(
+        index: pageIndex, // El índice determina cuál vista se muestra.
+        children: viewRoutes, // Lista de vistas disponibles.
+      ),
+      //* Barra de navegación personalizada en la parte inferior de la pantalla.
+      bottomNavigationBar: CustomNavigationBar(currentIndex: pageIndex),
     );
   }
 }

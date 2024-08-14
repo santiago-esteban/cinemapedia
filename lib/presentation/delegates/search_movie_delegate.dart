@@ -138,7 +138,7 @@ class _MovieItem extends StatelessWidget {
     final size = MediaQuery.of(context).size; // Obtiene el tamaño de la pantalla para ajustar el diseño.
 
     return GestureDetector(
-      onTap: () => context.go('/movie/${movie.id}'), // Navega a la página individual de la película al tocar el ítem.
+      onTap: () => context.go('/home/0/movie/${movie.id}'), // Navega a la página individual de la película al tocar el ítem.
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         child: Row(
