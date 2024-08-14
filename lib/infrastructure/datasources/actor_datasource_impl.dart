@@ -23,16 +23,9 @@ class ActorDatasourceImpl extends ActorsDatasource {
   //* Convierte la respuesta a un modelo interno y luego mapea los datos a entidades de 'Actor'.
   @override
   Future<List<Actor>> getActorByMovie(String movieId) async {
-    // Realiza la petición HTTP para obtener los créditos de la película.
-    final response = await dio.get('/movie/$movieId/credits');
-
-    // Convierte la respuesta JSON en un objeto `CreditsResponse`.
-    final castResponse = CreditsResponse.fromJson(response.data);
-
-    // Mapea los datos de los actores desde el formato de la API a la entidad `Actor`.
-    List<Actor> actors = castResponse.cast.map((cast) => ActorMapper.castDBToEntity(cast)).toList();
-
-    // Retorna la lista de actores.
-    return actors;
+    final response = await dio.get('/movie/$movieId/credits'); // Realiza la petición HTTP para obtener los créditos de la película.
+    final castResponse = CreditsResponse.fromJson(response.data); // Convierte la respuesta JSON en un objeto `CreditsResponse`.
+    List<Actor> actors = castResponse.cast.map((cast) => ActorMapper.castDBToEntity(cast)).toList(); // Mapea los datos de los actores desde el formato de la API a la entidad `Actor`.
+    return actors; // Retorna la lista de actores.
   }
 }
