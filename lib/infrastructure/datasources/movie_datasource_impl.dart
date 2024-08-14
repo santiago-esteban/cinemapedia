@@ -1,83 +1,77 @@
-import 'package:cinemapedia/infrastructure/mappers/movie_mapper.dart';
-import 'package:cinemapedia/config/constants/environment.dart';
-import 'package:cinemapedia/domain/datasources/movies_datasource.dart';
+// Importa las librerías necesarias para la implementación del datasource de películas.
 import 'package:cinemapedia/domain/entities/movie.dart';
+import 'package:cinemapedia/config/constants/environment.dart';
 import 'package:cinemapedia/infrastructure/models/models.dart';
+import 'package:cinemapedia/infrastructure/mappers/movie_mapper.dart';
+import 'package:cinemapedia/domain/datasources/movies_datasource.dart';
 import 'package:dio/dio.dart';
 
-//* Implementación del datasource de películas, que maneja las peticiones HTTP hacia la API de The Movie Database (TMDB).
+//* Implementación concreta del datasource para obtener datos de películas.
 class MovieDatasourceImpl extends MoviesDatasource {
-  //* Instancia de Dio configurada con la URL base de la API de TMDB y los parámetros de consulta comunes, como la clave API y el idioma.
+  //* Instancia de Dio para manejar las peticiones HTTP.
   final dio = Dio(
     BaseOptions(
-      baseUrl: 'https://api.themoviedb.org/3',
+      baseUrl: 'https://api.themoviedb.org/3', // URL base de la API de The Movie Database.
       queryParameters: {
-        'api_key': Environment.tmdbKey,
-        'language': 'es',
+        'api_key': Environment.tmdbKey, // Clave de API para autenticar las peticiones.
+        'language': 'es', // Idioma de las respuestas de la API.
       },
     ),
   );
 
-  //* Método privado que convierte una respuesta JSON en una lista de entidades de tipo Movie.
-  // Filtra las películas que no tienen un poster válido y utiliza el MovieMapper para mapear las películas desde el modelo de datos de la API hacia la entidad Movie.
+  //* Convierte la respuesta JSON de la API en una lista de objetos `Movie`. Filtra las películas que no tienen un póster y las convierte usando el mapeador `MovieMapper`.
   List<Movie> _jsonToMovies(Map<String, dynamic> json) {
-    final movieDBResponse = MovieDbResponse.fromJson(json);
+    final movieDBResponse = MovieDbResponse.fromJson(json); // Convierte JSON en un objeto `MovieDbResponse`.
     final List<Movie> movies = movieDBResponse.results
-        .where((moviedb) => moviedb.posterPath != 'no-poster')
-        .map((moviedb) => MovieMapper.movieDBToEntity(moviedb))
+        .where((moviedb) => moviedb.posterPath != 'no-poster') // Filtra películas sin póster.
+        .map((moviedb) => MovieMapper.movieDBToEntity(moviedb)) // Mapea a objetos `Movie`.
         .toList();
     return movies;
   }
 
-  //* Petición HTTP que recupera una lista de las películas actuales.
-  // Llama a la API de TMDB para obtener las películas que están en cartelera. Parámetro opcional `page` para la paginación.
+  //* Obtiene una lista de películas que están actualmente en cines. Realiza una petición HTTP y convierte la respuesta en una lista de objetos `Movie`.
   @override
   Future<List<Movie>> getNowPlaying({int page = 1}) async {
     final response = await dio.get('/movie/now_playing', queryParameters: {'page': page});
-    return _jsonToMovies(response.data);
+    return _jsonToMovies(response.data); // Convierte la respuesta JSON a objetos `Movie`.
   }
 
-  //* Petición HTTP que recupera una lista de las películas que saldrán próximamente.
-  // Llama a la API de TMDB para obtener las películas que estarán disponibles próximamente. Parámetro opcional `page` para la paginación.
+  //* Obtiene una lista de películas próximas a estrenarse. Realiza una petición HTTP y convierte la respuesta en una lista de objetos `Movie`.
   @override
   Future<List<Movie>> getUpcoming({int page = 1}) async {
     final response = await dio.get('/movie/upcoming', queryParameters: {'page': page});
-    return _jsonToMovies(response.data);
+    return _jsonToMovies(response.data); // Convierte la respuesta JSON a objetos `Movie`.
   }
 
-  //* Petición HTTP que recupera una lista de las películas más populares.
-  // Llama a la API de TMDB para obtener las películas más populares en la plataforma. Parámetro opcional `page` para la paginación.
+  //* Obtiene una lista de películas populares. Realiza una petición HTTP y convierte la respuesta en una lista de objetos `Movie`.
   @override
   Future<List<Movie>> getPopular({int page = 1}) async {
     final response = await dio.get('/movie/popular', queryParameters: {'page': page});
-    return _jsonToMovies(response.data);
+    return _jsonToMovies(response.data); // Convierte la respuesta JSON a objetos `Movie`.
   }
 
-  //* Petición HTTP que recupera una lista de las películas mejor valoradas.
-  // Llama a la API de TMDB para obtener las películas mejor valoradas por los usuarios. Parámetro opcional `page` para la paginación.
+  //* Obtiene una lista de películas con las mejores calificaciones. Realiza una petición HTTP y convierte la respuesta en una lista de objetos `Movie`.
   @override
   Future<List<Movie>> getTopRated({int page = 1}) async {
     final response = await dio.get('/movie/top_rated', queryParameters: {'page': page});
-    return _jsonToMovies(response.data);
+    return _jsonToMovies(response.data); // Convierte la respuesta JSON a objetos `Movie`.
   }
 
-  //* Petición HTTP que recupera los detalles de una película individual a través de su ID.
-  // Llama a la API de TMDB para obtener los detalles de una película específica. Si no se encuentra la película, lanza una excepción.
+  //* Obtiene detalles de una película específica usando su ID. Realiza una petición HTTP para obtener los detalles de la película y convierte la respuesta en un objeto `Movie`.
   @override
   Future<Movie> getMovieById(String id) async {
     final response = await dio.get('/movie/$id');
-    if (response.statusCode != 200) throw Exception('Movie with id: $id not found');
-    final movieDetails = MovieDetails.fromJson(response.data);
-    final Movie movie = MovieMapper.movieDetailsToEntity(movieDetails);
+    if (response.statusCode != 200) throw Exception('Movie with id: $id not found'); // Manejo de errores.
+    final movieDetails = MovieDetails.fromJson(response.data); // Convierte JSON en `MovieDetails`.
+    final Movie movie = MovieMapper.movieDetailsToEntity(movieDetails); // Mapea a objeto `Movie`.
     return movie;
   }
 
-  //* Petición HTTP que busca películas a través de una consulta de texto.
-  // Llama a la API de TMDB para buscar películas basadas en una consulta proporcionada por el usuario. Si la consulta está vacía, devuelve una lista vacía.
+  //* Busca películas que coincidan con una consulta de búsqueda. Realiza una petición HTTP con la consulta proporcionada y convierte la respuesta en una lista de objetos `Movie`.
   @override
   Future<List<Movie>> searchMovies(String query) async {
-    if (query.isEmpty) return [];
+    if (query.isEmpty) return []; // Devuelve una lista vacía si la consulta está vacía.
     final response = await dio.get('/search/movie', queryParameters: {'query': query});
-    return _jsonToMovies(response.data);
+    return _jsonToMovies(response.data); // Convierte la respuesta JSON a objetos `Movie`.
   }
 }

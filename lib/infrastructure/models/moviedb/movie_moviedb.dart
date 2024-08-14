@@ -1,4 +1,6 @@
+//* Clase que representa los datos de una película obtenida de MovieDB.
 class MovieMovieDB {
+  //* Constructor de la clase.
   MovieMovieDB({
     required this.adult,
     required this.backdropPath,
@@ -16,21 +18,22 @@ class MovieMovieDB {
     required this.voteCount,
   });
 
-  final bool adult;
-  final String backdropPath;
-  final List<int> genreIds;
-  final int id;
-  final String originalLanguage;
-  final String originalTitle;
-  final String overview;
-  final double popularity;
-  final String posterPath;
-  final DateTime? releaseDate;
-  final String title;
-  final bool video;
-  final double voteAverage;
-  final int voteCount;
+  final bool adult; // Indica si la película es solo para adultos.
+  final String backdropPath; // Ruta de la imagen de fondo de la película.
+  final List<int> genreIds; // Lista de IDs de géneros asociados a la película.
+  final int id; // Identificador único de la película.
+  final String originalLanguage; // Idioma original de la película.
+  final String originalTitle; // Título original de la película.
+  final String overview; // Resumen de la trama de la película.
+  final double popularity; // Popularidad de la película.
+  final String posterPath; // Ruta del póster de la película.
+  final DateTime? releaseDate; // Fecha de estreno de la película. Puede ser nulo.
+  final String title; // Título de la película.
+  final bool video; // Indica si la película es un video.
+  final double voteAverage; // Promedio de valoraciones que ha recibido la película.
+  final int voteCount; // Número total de valoraciones que ha recibido la película.
 
+  //* Método para crear una instancia de MovieMovieDB a partir de un JSON.
   factory MovieMovieDB.fromJson(Map<String, dynamic> json) => MovieMovieDB(
         adult: json["adult"] ?? false,
         backdropPath: json["backdrop_path"] ?? '',
@@ -50,6 +53,7 @@ class MovieMovieDB {
         voteCount: json["vote_count"] ?? 0,
       );
 
+  //* Método para convertir una instancia de MovieMovieDB a JSON.
   Map<String, dynamic> toJson() => {
         "adult": adult,
         "backdrop_path": backdropPath,

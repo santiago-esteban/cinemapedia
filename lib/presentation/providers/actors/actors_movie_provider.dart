@@ -2,21 +2,24 @@ import 'package:cinemapedia/domain/entities/actor.dart';
 import 'package:cinemapedia/presentation/providers/actors/actors_repository_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final actorsMovieProvider =
-    StateNotifierProvider<ActorsMovieProvider, Map<String, List<Actor>>>((ref) {
-  final actorsRepository = ref.watch(actorsRepositoryProvider).getActorByMovie;
-  return ActorsMovieProvider(actorsRepository);
+//* Proveedor de estado para manejar la lista de actores por película.
+final actorsMovieProvider = StateNotifierProvider<ActorsMovieProvider, Map<String, List<Actor>>>((ref) {
+  final actorsRepository = ref.watch(actorsRepositoryProvider).getActorByMovie; // Obtiene la función getActorByMovie del repositorio de actores.
+  return ActorsMovieProvider(actorsRepository); // Crea una instancia de ActorsMovieProvider con la función de obtención de actores.
 });
 
-typedef GetActorsCallBack = Future<List<Actor>> Function(String movieId);
+typedef GetActorsCallBack = Future<List<Actor>> Function(String movieId); // Tipo de callback para obtener una lista de actores dado un ID de película.
 
+//* Clase que maneja el estado de los actores para diferentes películas.
 class ActorsMovieProvider extends StateNotifier<Map<String, List<Actor>>> {
-  final GetActorsCallBack getActors;
-  ActorsMovieProvider(this.getActors) : super({});
+  final GetActorsCallBack getActors; // Función de callback para obtener actores basado en el ID de la película.
 
+  ActorsMovieProvider(this.getActors) : super({}); // Constructor que inicializa el estado con un mapa vacío.
+
+  //* Método para cargar actores para una película específica.
   Future<void> loadActors({required String movieId}) async {
-    if (state[movieId] != null) return;
-    final List<Actor> actors = await getActors(movieId);
-    state = {...state, movieId: actors};
+    if (state[movieId] != null) return; // Verifica si los actores para la película ya están cargados.
+    final List<Actor> actors = await getActors(movieId); // Obtiene la lista de actores llamando a la función getActors.
+    state = {...state, movieId: actors}; // Actualiza el estado con la lista de actores para la película dada.
   }
 }

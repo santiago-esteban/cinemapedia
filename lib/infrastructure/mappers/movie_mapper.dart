@@ -1,46 +1,52 @@
+// Importa las clases necesarias para mapear datos de películas desde el modelo de la API a las entidades de la aplicación.
 import 'package:cinemapedia/domain/entities/movie.dart';
 import 'package:cinemapedia/infrastructure/models/models.dart';
 
+//* Clase responsable de convertir datos de películas desde el formato de la API a entidades utilizadas en la aplicación.
 class MovieMapper {
+  //* Mapea un objeto `MovieMovieDB` (modelo de la API) a una entidad `Movie`.
   static Movie movieDBToEntity(MovieMovieDB moviedb) => Movie(
-        adult: moviedb.adult,
+        adult: moviedb.adult, // Indica si la película es para adultos.
         backdropPath: (moviedb.backdropPath != '')
-            ? 'https://image.tmdb.org/t/p/w500/${moviedb.backdropPath}'
-            : 'https://img.freepik.com/free-vector/young-woman-protesting-with-round-banner-meeting-stop-attention-flat-vector-illustration-demonstration-active-position-concept-mobile-app-template_74855-12669.jpg?size=626&ext=jpg',
-        genreIds: moviedb.genreIds.map((e) => e.toString()).toList(),
-        id: moviedb.id,
-        originalLanguage: moviedb.originalLanguage,
-        originalTitle: moviedb.originalTitle,
-        overview: moviedb.overview,
-        popularity: moviedb.popularity,
+            ? 'https://image.tmdb.org/t/p/w500/${moviedb.backdropPath}' // URL del fondo de la película.
+            : 'https://www.movienewz.com/img/films/poster-holder.jpg', // Imagen por defecto.
+        genreIds: moviedb.genreIds.map((e) => e.toString()).toList(), // Conversión de los IDs de género a String.
+        id: moviedb.id, // Identificador único de la película.
+        originalLanguage: moviedb.originalLanguage, // Idioma original de la película.
+        originalTitle: moviedb.originalTitle, // Título original de la película.
+        overview: moviedb.overview, // Resumen de la película.
+        popularity: moviedb.popularity, // Popularidad de la película.
         posterPath: (moviedb.posterPath != '')
-            ? 'https://image.tmdb.org/t/p/w500/${moviedb.posterPath}'
-            : 'https://www.movienewz.com/img/films/poster-holder.jpg',
-        releaseDate: moviedb.releaseDate != null ? moviedb.releaseDate! : DateTime(0000, 00, 00),
-        title: moviedb.title,
-        video: moviedb.video,
-        voteAverage: moviedb.voteAverage,
-        voteCount: moviedb.voteCount,
+            ? 'https://image.tmdb.org/t/p/w500/${moviedb.posterPath}' // URL del póster de la película.
+            : 'https://www.movienewz.com/img/films/poster-holder.jpg', // Imagen por defecto.
+        releaseDate:
+            moviedb.releaseDate != null ? moviedb.releaseDate! : DateTime(0000, 00, 00), // Fecha de lanzamiento.
+        title: moviedb.title, // Título de la película.
+        video: moviedb.video, // Indica si hay un video/tráiler asociado.
+        voteAverage: moviedb.voteAverage, // Promedio de valoración.
+        voteCount: moviedb.voteCount, // Cantidad de valoraciones.
       );
 
+  //* Mapea un objeto `MovieDetails` (modelo de la API) a una entidad `Movie`.
   static Movie movieDetailsToEntity(MovieDetails moviedb) => Movie(
-        adult: moviedb.adult,
+        adult: moviedb.adult, // Indica si la película es para adultos.
         backdropPath: (moviedb.backdropPath != '')
-            ? 'https://image.tmdb.org/t/p/w500/${moviedb.backdropPath}'
-            : 'https://img.freepik.com/free-vector/young-woman-protesting-with-round-banner-meeting-stop-attention-flat-vector-illustration-demonstration-active-position-concept-mobile-app-template_74855-12669.jpg?size=626&ext=jpg',
-        genreIds: moviedb.genres.map((e) => e.name).toList(),
-        id: moviedb.id,
-        originalLanguage: moviedb.originalLanguage,
-        originalTitle: moviedb.originalTitle,
-        overview: moviedb.overview,
-        popularity: moviedb.popularity,
+            ? 'https://image.tmdb.org/t/p/w500/${moviedb.backdropPath}' // URL del fondo de la película.
+            : 'https://www.movienewz.com/img/films/poster-holder.jpg', // Imagen por defecto.
+        genreIds: moviedb.genres.map((e) => e.name).toList(), // Mapea los géneros a sus nombres.
+        id: moviedb.id, // Identificador único de la película.
+        originalLanguage: moviedb.originalLanguage, // Idioma original de la película.
+        originalTitle: moviedb.originalTitle, // Título original de la película.
+        overview: moviedb.overview, // Resumen de la película.
+        popularity: moviedb.popularity, // Nivel de popularidad de la película.
         posterPath: (moviedb.posterPath != '')
-            ? 'https://image.tmdb.org/t/p/w500/${moviedb.posterPath}'
-            : 'https://img.freepik.com/free-vector/young-woman-protesting-with-round-banner-meeting-stop-attention-flat-vector-illustration-demonstration-active-position-concept-mobile-app-template_74855-12669.jpg?size=626&ext=jpg',
-        releaseDate: moviedb.releaseDate,
-        title: moviedb.title,
-        video: moviedb.video,
-        voteAverage: moviedb.voteAverage,
-        voteCount: moviedb.voteCount,
+            ? 'https://image.tmdb.org/t/p/w500/${moviedb.posterPath}' // URL del póster de la película.
+            : 'https://www.movienewz.com/img/films/poster-holder.jpg', // Imagen por defecto.
+        releaseDate:
+            moviedb.releaseDate != null ? moviedb.releaseDate! : DateTime(0000, 00, 00), // Fecha de lanzamiento.
+        title: moviedb.title, // Título de la película.
+        video: moviedb.video, // Indica si hay un video asociado.
+        voteAverage: moviedb.voteAverage, // Promedio de valoración.
+        voteCount: moviedb.voteCount, // Cantidad de valoraciones.
       );
 }
