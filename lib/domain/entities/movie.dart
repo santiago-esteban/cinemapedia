@@ -1,5 +1,11 @@
 //* Clase que representa una película en la aplicación.
+import 'package:isar/isar.dart';
+
+part 'movie.g.dart';
+
+@collection
 class Movie {
+  Id? isarId;
   final bool adult; // Indica si la película es para adultos.
   final String backdropPath; // Ruta de la imagen de fondo de la película.
   final List<String> genreIds; // Lista de identificadores de géneros asociados a la película.
