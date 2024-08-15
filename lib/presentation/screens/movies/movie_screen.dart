@@ -65,6 +65,14 @@ class _CustomSliverAppBar extends StatelessWidget {
       backgroundColor: Colors.black, // Color de fondo de la AppBar.
       expandedHeight: size.height * 0.7, // Altura expandida de la AppBar.
       foregroundColor: Colors.white, // Color del texto de la AppBar.
+      actions: [
+        IconButton(
+            onPressed: () {
+              //TODO: Realizar el toggle
+            },
+            icon: const Icon(Icons.favorite_border))
+        // icon: const Icon(Icons.favorite_rounded, color: Colors.red))
+      ],
       flexibleSpace: FlexibleSpaceBar(
         titlePadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5), // Padding alrededor del título.
         background: Stack(
@@ -81,34 +89,20 @@ class _CustomSliverAppBar extends StatelessWidget {
                 },
               ),
             ),
+            //* Gradiente superior central
+            _CustomGradient(
+              beginAlign: Alignment.bottomCenter,
+              endAlign: Alignment.topCenter,
+              stops: const [0.8, 1.0],
+              colors: const [Colors.transparent, Colors.black54],
+            ),
             //* Gradiente inferior central
-            const SizedBox.expand(
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter, // Inicio del gradiente.
-                    end: Alignment.bottomCenter, // Fin del gradiente.
-                    stops: [0.7, 1.0], // Puntos de parada del gradiente.
-                    colors: [Colors.transparent, Colors.black87], // Colores del gradiente.
-                  ),
-                ),
-              ),
-            ),
-            //* Gradiente superior izquierdo
-            const SizedBox.expand(
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft, // Inicio del gradiente.
-                    stops: [0.0, 0.3], // Puntos de parada del gradiente.
-                    colors: [
-                      Colors.black87, // Color del gradiente superior.
-                      Colors.transparent, // Color del gradiente inferior.
-                    ],
-                  ),
-                ),
-              ),
-            ),
+            _CustomGradient(
+              beginAlign: Alignment.topCenter,
+              endAlign: Alignment.bottomCenter,
+              stops: const [0.8, 1.0],
+              colors: const [Colors.transparent, Colors.black54],
+            )
           ],
         ),
       ),
@@ -237,6 +231,37 @@ class _ActorsMovie extends ConsumerWidget {
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class _CustomGradient extends StatelessWidget {
+  final AlignmentGeometry beginAlign;
+  final AlignmentGeometry endAlign;
+  final List<double> stops;
+  final List<Color> colors;
+
+  const _CustomGradient({
+    required this.beginAlign,
+    required this.endAlign,
+    required this.stops,
+    required this.colors,
+  })  : assert(stops.length == 2, 'La lista "stops" debe contener exactamente 2 elementos.'),
+        assert(colors.length == 2, 'La lista "colors" debe contener exactamente 2 elementos.');
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox.expand(
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: beginAlign, // Inicio del gradiente.
+            end: endAlign, // Fin del gradiente.
+            stops: stops, // Puntos de parada del gradiente.
+            colors: colors, // Colores del gradiente.
+          ),
+        ),
       ),
     );
   }
