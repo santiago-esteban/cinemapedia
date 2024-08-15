@@ -78,7 +78,7 @@ class _SlideCustomWidget extends StatelessWidget {
               }
               //* Navegación a la pantalla individual de la película
               return GestureDetector(
-                onTap: () => context.push('/movie/${movie.id}'), // Navega a la pantalla de detalles de la película cuando se toca
+                onTap: () => context.push('/home/0/movie/${movie.id}'), // Navega a la pantalla de detalles de la película cuando se toca
                 child: FadeIn(child: child), // Se muestra el widget en FadeIn para un efecto de desvanecimiento
               );
             },
