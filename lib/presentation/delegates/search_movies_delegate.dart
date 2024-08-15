@@ -1,18 +1,16 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-
-import 'package:cinemapedia/domain/entities/movie.dart';
-import 'package:cinemapedia/config/helpers/formats.dart';
-
 import 'package:go_router/go_router.dart';
 import 'package:animate_do/animate_do.dart';
+import 'package:cinemapedia/domain/domain.dart';
+import 'package:cinemapedia/config/config.dart';
 
 //* Tipo de función para buscar películas basado en una consulta.
-typedef SearchMoviesCallBack = Future<List<Movie>> Function(String query);
+typedef SearchMoviesCallback = Future<List<Movie>> Function(String query);
 
 //* Delegate personalizado para la búsqueda de películas en la aplicación.
 class SearchMoviesDelegate extends SearchDelegate<Movie?> {
-  final SearchMoviesCallBack searchMovies; // Referencia a la función para realizar la búsqueda de películas.
+  final SearchMoviesCallback searchMovies; // Referencia a la función para realizar la búsqueda de películas.
   List<Movie> initialMovies; // Lista inicial de películas que se mostrará antes de realizar la búsqueda.
 
   //* Controladores de stream para manejar el estado de carga y las películas encontradas.

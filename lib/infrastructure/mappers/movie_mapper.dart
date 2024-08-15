@@ -1,6 +1,6 @@
 // Importa las clases necesarias para mapear datos de películas desde el modelo de la API a las entidades de la aplicación.
-import 'package:cinemapedia/domain/entities/movie.dart';
-import 'package:cinemapedia/infrastructure/models/models.dart';
+import 'package:cinemapedia/domain/domain.dart';
+import 'package:cinemapedia/infrastructure/infrastructure.dart';
 
 //* Clase responsable de convertir datos de películas desde el formato de la API a entidades utilizadas en la aplicación.
 class MovieMapper {

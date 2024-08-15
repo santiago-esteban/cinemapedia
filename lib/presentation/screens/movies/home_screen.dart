@@ -1,6 +1,5 @@
-import 'package:cinemapedia/presentation/views/views.dart'; // Importa las vistas de la aplicación.
-import 'package:flutter/material.dart'; // Importa los widgets de Flutter.
-import 'package:cinemapedia/presentation/widgets/widgets.dart'; // Importa los widgets personalizados.
+import 'package:cinemapedia/presentation/presentation.dart';
+import 'package:flutter/material.dart';
 
 //* Pantalla principal que muestra la interfaz de inicio de la aplicación.
 class HomeScreen extends StatelessWidget {

@@ -1,5 +1,4 @@
-import 'package:cinemapedia/infrastructure/datasources/actor_datasource_impl.dart';
-import 'package:cinemapedia/infrastructure/repositories/actor_repository_impl.dart';
+import 'package:cinemapedia/infrastructure/infrastructure.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //* Proveedor de instancia para el repositorio de actores.

@@ -1,7 +1,4 @@
-import 'dart:math';
-
-import 'package:cinemapedia/domain/datasources/isar_datasource.dart';
-import 'package:cinemapedia/domain/entities/movie.dart';
+import 'package:cinemapedia/domain/domain.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 

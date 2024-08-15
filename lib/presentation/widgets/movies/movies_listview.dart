@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart'; // Importa widgets básicos de Flutter.
-import 'package:cinemapedia/domain/entities/movie.dart'; // Importa la entidad Movie.
-import 'package:cinemapedia/config/helpers/formats.dart'; // Importa helper para formatos de números.
+import 'package:cinemapedia/domain/domain.dart'; // Importa la entidad Movie.
+import 'package:cinemapedia/config/config.dart'; // Importa helper para formatos de números.
 import 'package:go_router/go_router.dart'; // Importa go_router para la navegación.
 import 'package:animate_do/animate_do.dart'; // Importa animate_do para animaciones.
 

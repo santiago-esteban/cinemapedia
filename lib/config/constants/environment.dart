@@ -1,4 +1,3 @@
-// Importa la librería necesaria para manejar variables de entorno.
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 //* Clase que maneja las variables de entorno de la aplicación.

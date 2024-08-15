@@ -1,9 +1,7 @@
 // Importa las librerías necesarias para la implementación del datasource de películas.
-import 'package:cinemapedia/domain/entities/movie.dart';
-import 'package:cinemapedia/config/constants/environment.dart';
-import 'package:cinemapedia/infrastructure/models/models.dart';
-import 'package:cinemapedia/infrastructure/mappers/movie_mapper.dart';
-import 'package:cinemapedia/domain/datasources/movies_datasource.dart';
+import 'package:cinemapedia/domain/domain.dart';
+import 'package:cinemapedia/config/config.dart';
+import 'package:cinemapedia/infrastructure/infrastructure.dart';
 import 'package:dio/dio.dart';
 
 //* Implementación concreta del datasource para obtener datos de películas.

@@ -1,6 +1,6 @@
-import 'package:cinemapedia/domain/entities/movie.dart';
-import 'package:cinemapedia/presentation/providers/providers.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart'; // Importa Riverpod para la gestión del estado.
+import 'package:cinemapedia/domain/domain.dart';
+import 'package:cinemapedia/presentation/presentation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //* Proveedor de estado para manejar la información de películas.
 final movieInfoProvider = StateNotifierProvider<MovieMapNotifier, Map<String, Movie>>((ref) {

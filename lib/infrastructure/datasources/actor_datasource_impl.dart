@@ -1,9 +1,7 @@
 // Importa las librerías y clases necesarias para la implementación del datasource de actores.
-import 'package:cinemapedia/domain/entities/actor.dart';
-import 'package:cinemapedia/config/constants/environment.dart';
-import 'package:cinemapedia/infrastructure/mappers/actor_mapper.dart';
-import 'package:cinemapedia/domain/datasources/actors_datasource.dart';
-import 'package:cinemapedia/infrastructure/models/tmdb/credits_response.dart';
+import 'package:cinemapedia/domain/domain.dart';
+import 'package:cinemapedia/config/config.dart';
+import 'package:cinemapedia/infrastructure/infrastructure.dart';
 import 'package:dio/dio.dart';
 
 //* Implementación concreta del datasource para obtener datos de actores.

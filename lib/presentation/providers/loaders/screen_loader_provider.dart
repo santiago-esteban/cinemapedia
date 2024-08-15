@@ -1,5 +1,5 @@
-import '../movies/movies_provider.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart'; // Importa Riverpod para la gestión del estado.
+import 'package:cinemapedia/presentation/presentation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //* Proveedor que indica si es la primera carga de datos de películas.
 final screenLoaderProvider = Provider<bool>((ref) {

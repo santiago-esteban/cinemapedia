@@ -1,7 +1,5 @@
 // Importaciones necesarias para el repositorio de actores.
-import 'package:cinemapedia/domain/entities/actor.dart';
-import 'package:cinemapedia/domain/datasources/actors_datasource.dart';
-import 'package:cinemapedia/domain/repositories/actors_repository.dart';
+import 'package:cinemapedia/domain/domain.dart';
 
 //* Implementación del repositorio de actores.
 class ActorRepositoryImpl extends ActorsRepository {

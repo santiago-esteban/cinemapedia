@@ -1,5 +1,5 @@
 // Importa la clase `Actor` que representa a un actor en la aplicación.
-import 'package:cinemapedia/domain/entities/actor.dart';
+import 'package:cinemapedia/domain/domain.dart';
 
 //* Interfaz abstracta para el repositorio de actores.
 abstract class ActorsRepository {

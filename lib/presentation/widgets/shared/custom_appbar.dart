@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:cinemapedia/presentation/providers/providers.dart';
-import 'package:cinemapedia/presentation/delegates/search_movies_delegate.dart';
+import 'package:cinemapedia/presentation/presentation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //* Un widget personalizado que representa la barra de aplicaciones de la parte superior.

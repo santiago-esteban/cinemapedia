@@ -1,6 +1,4 @@
-import 'package:cinemapedia/domain/entities/movie.dart';
-import 'package:cinemapedia/domain/datasources/isar_datasource.dart';
-import 'package:cinemapedia/domain/repositories/isar_repository.dart';
+import 'package:cinemapedia/domain/domain.dart';
 
 class IsarRepositoryImpl extends IsarRepository {
   final IsarDatasource datasource;

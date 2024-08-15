@@ -1,6 +1,6 @@
-import 'movies_provider.dart';
-import 'package:cinemapedia/domain/entities/movie.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart'; // Importa Riverpod para la gestión del estado.
+import 'package:cinemapedia/presentation/presentation.dart';
+import 'package:cinemapedia/domain/domain.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //* Proveedor de estado para obtener una lista de películas para el slideshow.
 final moviesSlideshowProvider = Provider<List<Movie>>((ref) {

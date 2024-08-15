@@ -1,6 +1,6 @@
-import 'package:cinemapedia/domain/entities/movie.dart';
-import 'package:cinemapedia/presentation/providers/movies/movies_repository_provider.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart'; // Importa Riverpod para la gestión del estado.
+import 'package:cinemapedia/domain/domain.dart';
+import 'package:cinemapedia/presentation/presentation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //* Proveedor de estado para manejar la lista de películas que se están reproduciendo actualmente.
 final nowPlayingMoviesProvider = StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) {

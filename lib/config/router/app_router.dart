@@ -1,5 +1,5 @@
 // Importa las pantallas de la aplicación y la librería para la gestión de rutas.
-import 'package:cinemapedia/presentation/screens/screens.dart';
+import 'package:cinemapedia/presentation/presentation.dart';
 import 'package:go_router/go_router.dart';
 
 //* Define el enrutador principal de la aplicación.

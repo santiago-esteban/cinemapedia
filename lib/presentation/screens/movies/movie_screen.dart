@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart'; // Importa los widgets de Flutter.
-import 'package:cinemapedia/domain/entities/movie.dart'; // Importa la entidad Movie.
-import 'package:cinemapedia/presentation/providers/providers.dart'; // Importa los proveedores de estado.
-import 'package:animate_do/animate_do.dart'; // Importa animate_do para animaciones.
-import 'package:flutter_riverpod/flutter_riverpod.dart'; // Importa Riverpod para la gestión del estado.
+import 'package:flutter/material.dart';
+import 'package:cinemapedia/domain/domain.dart';
+import 'package:cinemapedia/presentation/presentation.dart';
+import 'package:animate_do/animate_do.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //* Pantalla principal para mostrar la información de una película.
 class MovieScreen extends ConsumerStatefulWidget {

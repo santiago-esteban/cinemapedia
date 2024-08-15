@@ -1,6 +1,6 @@
-import 'package:cinemapedia/domain/entities/movie.dart';
-import 'package:cinemapedia/presentation/providers/providers.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart'; // Importa Riverpod para la gestión del estado.
+import 'package:cinemapedia/domain/domain.dart';
+import 'package:cinemapedia/presentation/presentation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //* Proveedor de estado para manejar la consulta de búsqueda de películas.
 final searchQueryProvider = StateProvider<String>((ref) => ''); // Inicializa el estado de la consulta de búsqueda como una cadena vacía.

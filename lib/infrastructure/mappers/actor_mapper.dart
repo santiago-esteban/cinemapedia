@@ -1,6 +1,6 @@
 // Importa las clases necesarias para el mapeo de datos de actores.
-import 'package:cinemapedia/domain/entities/actor.dart';
-import 'package:cinemapedia/infrastructure/models/tmdb/credits_response.dart';
+import 'package:cinemapedia/domain/domain.dart';
+import 'package:cinemapedia/infrastructure/infrastructure.dart';
 
 //* Clase encargada de mapear datos de actores desde el modelo de la API a la entidad de la aplicación.
 class ActorMapper {

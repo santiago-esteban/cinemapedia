@@ -1,9 +1,8 @@
 //* Vista principal dentro de la pantalla de inicio.
 import 'package:flutter/material.dart'; // Importa los widgets de Flutter.
 import 'package:flutter_riverpod/flutter_riverpod.dart'; // Importa Riverpod para la gestión del estado.
-import 'package:cinemapedia/config/helpers/formats.dart';
-import 'package:cinemapedia/presentation/widgets/widgets.dart'; // Importa los widgets personalizados.
-import 'package:cinemapedia/presentation/providers/providers.dart'; // Importa los proveedores de estado.
+import 'package:cinemapedia/config/config.dart';
+import 'package:cinemapedia/presentation/presentation.dart'; // Importa los proveedores de estado.
 
 class HomeView extends ConsumerStatefulWidget {
   const HomeView({super.key}); // Constructor.
