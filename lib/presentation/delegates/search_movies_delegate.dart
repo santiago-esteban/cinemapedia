@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import 'package:cinemapedia/domain/entities/movie.dart';
-import 'package:cinemapedia/config/helpers/human_formats.dart';
+import 'package:cinemapedia/config/helpers/formats.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:animate_do/animate_do.dart';
@@ -11,7 +11,7 @@ import 'package:animate_do/animate_do.dart';
 typedef SearchMoviesCallBack = Future<List<Movie>> Function(String query);
 
 //* Delegate personalizado para la búsqueda de películas en la aplicación.
-class SearchMovieDelegate extends SearchDelegate<Movie?> {
+class SearchMoviesDelegate extends SearchDelegate<Movie?> {
   final SearchMoviesCallBack searchMovies; // Referencia a la función para realizar la búsqueda de películas.
   List<Movie> initialMovies; // Lista inicial de películas que se mostrará antes de realizar la búsqueda.
 
@@ -22,7 +22,7 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
   Timer? _debouncedTimer; // Temporizador para implementar el debounce en las búsquedas.
 
   //* Constructor que inicializa la función de búsqueda y las películas iniciales.
-  SearchMovieDelegate({
+  SearchMoviesDelegate({
     required this.searchMovies,
     required this.initialMovies,
   }) : super(searchFieldLabel: 'Buscar película');
@@ -176,7 +176,7 @@ class _MovieItem extends StatelessWidget {
                       Icon(Icons.star_half_rounded, color: Colors.yellow.shade800), // Muestra un ícono de estrella para las valoraciones.
                       const SizedBox(width: 5), // Espacio entre la estrella y la calificación.
                       Text(
-                        HumanFormats.number(movie.voteAverage, 1), // Muestra la calificación de la película formateada.
+                        Formats.number(movie.voteAverage, 1), // Muestra la calificación de la película formateada.
                         style: textStyles.bodyMedium!.copyWith(color: Colors.yellow.shade900),
                       )
                     ],

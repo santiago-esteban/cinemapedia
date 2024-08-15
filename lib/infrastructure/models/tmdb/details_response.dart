@@ -1,5 +1,5 @@
 //* Clase que representa los detalles de una película.
-class MovieDetails {
+class DetailsResponse {
   final bool adult; // Indica si la película es solo para adultos.
   final String backdropPath; // Ruta del fondo de la película.
   final BelongsToCollection? belongsToCollection; // Colección a la que pertenece la película, si aplica.
@@ -27,7 +27,7 @@ class MovieDetails {
   final double voteAverage; // Promedio de valoraciones de la película.
   final int voteCount; // Número de valoraciones que ha recibido la película.
 
-  MovieDetails({
+  DetailsResponse({
     required this.adult,
     required this.backdropPath,
     required this.belongsToCollection,
@@ -56,12 +56,11 @@ class MovieDetails {
     required this.voteCount,
   });
 
-  //* Método para crear una instancia de MovieDetails a partir de un JSON.
-  factory MovieDetails.fromJson(Map<String, dynamic> json) => MovieDetails(
+  //* Método para crear una instancia de DetailsResponse a partir de un JSON.
+  factory DetailsResponse.fromJson(Map<String, dynamic> json) => DetailsResponse(
         adult: json["adult"],
         backdropPath: json["backdrop_path"] ?? '',
-        belongsToCollection:
-            json["belongs_to_collection"] == null ? null : BelongsToCollection.fromJson(json["belongs_to_collection"]),
+        belongsToCollection: json["belongs_to_collection"] == null ? null : BelongsToCollection.fromJson(json["belongs_to_collection"]),
         budget: json["budget"],
         genres: List<Genre>.from(json["genres"].map((x) => Genre.fromJson(x))),
         homepage: json["homepage"],
@@ -73,10 +72,8 @@ class MovieDetails {
         overview: json["overview"],
         popularity: json["popularity"]?.toDouble(),
         posterPath: json["poster_path"],
-        productionCompanies:
-            List<ProductionCompany>.from(json["production_companies"].map((x) => ProductionCompany.fromJson(x))),
-        productionCountries:
-            List<ProductionCountry>.from(json["production_countries"].map((x) => ProductionCountry.fromJson(x))),
+        productionCompanies: List<ProductionCompany>.from(json["production_companies"].map((x) => ProductionCompany.fromJson(x))),
+        productionCountries: List<ProductionCountry>.from(json["production_countries"].map((x) => ProductionCountry.fromJson(x))),
         releaseDate: json["release_date"] != null ? DateTime.tryParse(json["release_date"]) : null,
         revenue: json["revenue"],
         runtime: json["runtime"],
@@ -89,7 +86,7 @@ class MovieDetails {
         voteCount: json["vote_count"],
       );
 
-  //* Método para convertir una instancia de MovieDetails a JSON.
+  //* Método para convertir una instancia de DetailsResponse a JSON.
   Map<String, dynamic> toJson() => {
         "adult": adult,
         "backdrop_path": backdropPath,
@@ -107,9 +104,7 @@ class MovieDetails {
         "poster_path": posterPath,
         "production_companies": List<dynamic>.from(productionCompanies.map((x) => x.toJson())),
         "production_countries": List<dynamic>.from(productionCountries.map((x) => x.toJson())),
-        "release_date": releaseDate != null
-            ? "${releaseDate!.year.toString().padLeft(4, '0')}-${releaseDate!.month.toString().padLeft(2, '0')}-${releaseDate!.day.toString().padLeft(2, '0')}"
-            : null,
+        "release_date": releaseDate != null ? "${releaseDate!.year.toString().padLeft(4, '0')}-${releaseDate!.month.toString().padLeft(2, '0')}-${releaseDate!.day.toString().padLeft(2, '0')}" : null,
         "revenue": revenue,
         "runtime": runtime,
         "spoken_languages": List<dynamic>.from(spokenLanguages.map((x) => x.toJson())),

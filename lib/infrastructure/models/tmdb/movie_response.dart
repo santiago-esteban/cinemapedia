@@ -1,7 +1,7 @@
 //* Clase que representa los datos de una película obtenida de MovieDB.
-class MovieMovieDB {
+class MovieResponse {
   //* Constructor de la clase.
-  MovieMovieDB({
+  MovieResponse({
     required this.adult,
     required this.backdropPath,
     required this.genreIds,
@@ -33,8 +33,8 @@ class MovieMovieDB {
   final double voteAverage; // Promedio de valoraciones que ha recibido la película.
   final int voteCount; // Número total de valoraciones que ha recibido la película.
 
-  //* Método para crear una instancia de MovieMovieDB a partir de un JSON.
-  factory MovieMovieDB.fromJson(Map<String, dynamic> json) => MovieMovieDB(
+  //* Método para crear una instancia de MovieResponse a partir de un JSON.
+  factory MovieResponse.fromJson(Map<String, dynamic> json) => MovieResponse(
         adult: json["adult"] ?? false,
         backdropPath: json["backdrop_path"] ?? '',
         genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
@@ -44,16 +44,14 @@ class MovieMovieDB {
         overview: json["overview"] ?? '',
         popularity: json["popularity"]?.toDouble() ?? 0,
         posterPath: json["poster_path"] ?? '',
-        releaseDate: json["release_date"] != null && json["release_date"].toString().isNotEmpty
-            ? DateTime.parse(json["release_date"])
-            : null,
+        releaseDate: json["release_date"] != null && json["release_date"].toString().isNotEmpty ? DateTime.parse(json["release_date"]) : null,
         title: json["title"] ?? 'El título no está disponible',
         video: json["video"] ?? false,
         voteAverage: json["vote_average"]?.toDouble() ?? 0,
         voteCount: json["vote_count"] ?? 0,
       );
 
-  //* Método para convertir una instancia de MovieMovieDB a JSON.
+  //* Método para convertir una instancia de MovieResponse a JSON.
   Map<String, dynamic> toJson() => {
         "adult": adult,
         "backdrop_path": backdropPath,
@@ -64,9 +62,7 @@ class MovieMovieDB {
         "overview": overview,
         "popularity": popularity,
         "poster_path": posterPath,
-        "release_date": releaseDate != null
-            ? "${releaseDate!.year.toString().padLeft(4, '0')}-${releaseDate!.month.toString().padLeft(2, '0')}-${releaseDate!.day.toString().padLeft(2, '0')}"
-            : null,
+        "release_date": releaseDate != null ? "${releaseDate!.year.toString().padLeft(4, '0')}-${releaseDate!.month.toString().padLeft(2, '0')}-${releaseDate!.day.toString().padLeft(2, '0')}" : null,
         "title": title,
         "video": video,
         "vote_average": voteAverage,

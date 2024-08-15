@@ -1,5 +1,5 @@
 //* Archivo de barril para la exportación de los modelos
-export 'moviedb/credits_response.dart';
-export 'moviedb/movie_details.dart';
-export 'moviedb/movie_moviedb.dart';
-export 'moviedb/moviedb_response.dart';
+export 'tmdb/credits_response.dart';
+export 'tmdb/details_response.dart';
+export 'tmdb/movie_response.dart';
+export 'tmdb/movies_response.dart';

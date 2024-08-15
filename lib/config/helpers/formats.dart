@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 //* Clase que maneja el formateo de números en un formato más legible para los humanos.
-class HumanFormats {
+class Formats {
   //* Formatea un número de tipo double en un formato compacto, con una cantidad opcional de decimales.
   static String number(double number, [int decimals = 0]) {
     final formattedNumber = NumberFormat.compactCurrency(

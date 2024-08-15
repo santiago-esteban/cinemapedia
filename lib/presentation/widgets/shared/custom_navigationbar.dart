@@ -2,10 +2,10 @@ import 'package:flutter/material.dart'; // Importa los widgets principales de Fl
 import 'package:go_router/go_router.dart'; // Importa GoRouter para la gestión de rutas.
 
 //* Un widget que representa una barra de navegación inferior personalizada.
-class CustomNavigationBar extends StatelessWidget {
+class CustomNavigationbar extends StatelessWidget {
   final int currentIndex; // Índice actual que determina la vista seleccionada.
 
-  const CustomNavigationBar({
+  const CustomNavigationbar({
     super.key,
     required this.currentIndex, // El índice actual es requerido al crear la barra de navegación.
   });

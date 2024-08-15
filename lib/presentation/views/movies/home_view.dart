@@ -1,7 +1,7 @@
 //* Vista principal dentro de la pantalla de inicio.
 import 'package:flutter/material.dart'; // Importa los widgets de Flutter.
 import 'package:flutter_riverpod/flutter_riverpod.dart'; // Importa Riverpod para la gestión del estado.
-import 'package:cinemapedia/config/helpers/human_formats.dart';
+import 'package:cinemapedia/config/helpers/formats.dart';
 import 'package:cinemapedia/presentation/widgets/widgets.dart'; // Importa los widgets personalizados.
 import 'package:cinemapedia/presentation/providers/providers.dart'; // Importa los proveedores de estado.
 
@@ -26,8 +26,8 @@ class HomeViewState extends ConsumerState<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    final firstLoading = ref.watch(firstLoadingProvider); // Verifica si es la primera carga de datos.
-    if (firstLoading) return const FullScreenLoader(); // Muestra un cargador a pantalla completa si los datos aún están cargándose.
+    final screenLoader = ref.watch(screenLoaderProvider); // Verifica si es la primera carga de datos.
+    if (screenLoader) return const CustomScreenLoader(); // Muestra un cargador a pantalla completa si los datos aún están cargándose.
 
     final slideShowMovies = ref.watch(moviesSlideshowProvider); // Obtiene las películas para el carrusel.
     final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider); // Obtiene las películas actualmente en cartelera.
@@ -52,7 +52,7 @@ class HomeViewState extends ConsumerState<HomeView> {
                 MoviesListview(
                   movies: nowPlayingMovies, // Lista de películas en cartelera.
                   title: 'En cines',
-                  subTitle: HumanFormats.formatDate(DateTime.now()),
+                  subTitle: Formats.formatDate(DateTime.now()),
                   loadNextPage: () => ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(), // Función para cargar más películas al final.
                 ),
                 MoviesListview(

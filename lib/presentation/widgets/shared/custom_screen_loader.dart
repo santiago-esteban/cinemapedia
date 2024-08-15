@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 //* Un widget que muestra una pantalla de carga completa con un indicador de progreso y mensajes de carga que cambian periódicamente.
-class FullScreenLoader extends StatelessWidget {
-  const FullScreenLoader({super.key});
+class CustomScreenLoader extends StatelessWidget {
+  const CustomScreenLoader({super.key});
 
   //* Genera un `Stream` de mensajes de carga que cambian cada cierto tiempo.
   Stream<String> getLoadMessages() {

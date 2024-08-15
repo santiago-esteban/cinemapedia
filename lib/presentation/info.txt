@@ -5,18 +5,19 @@ INFORMACIÓN DE LOS DIRECTORIOS Y CLASES
 presentation: Capa de presentación de la aplicación.
 
   delegates: Este directorio contiene los delegates de la aplicación.
-      search_movie_delegate.dart: Contiene el código del delegate para la búsqueda de peliculas.
+      search_movies_delegate.dart: Contiene el código del delegate para la búsqueda de peliculas.
 
   providers: Son el puente de conexión entre las capas de la infraestructura y la capa de presentación. (Los widgets deben de interactuar con el/los providers para que estos interactuen con el usuario final).
       
       actors: Directorio que contiene las conexiones entre la infraestructura y la presentación de los actores.
-          actors_movie_provider.dart: Gestiona un mapa de actores por película. La clase ActorsMovieProvider obtiene actores para una película específica usando un callback (getActors) y actualiza el estado si aún no se han cargado.
+          actors_provider.dart: Gestiona un mapa de actores por película. La clase ActorsMovieProvider obtiene actores para una película específica usando un callback (getActors) y actualiza el estado si aún no se han cargado.
                                       El proveedor se conecta al repositorio de actores y permite acceder a la lista de actores por película.
           actors_repository_provider.dart: Usando Riverpod, proporciona una instancia de ActorRepositoryImpl, que a su vez utiliza ActorDatasourceImpl para obtener datos de actores desde la API.
+      loaders: Directorio que contiene las conexiones entre la infraestructura y la presentación de las cargas.
+          screen_loader_provider.dart: Indica si alguna de las listas de películas principales aún está vacía, retornando true si es así, o false si todas están cargadas.
       movies: Directorio que contiene las conexiones entre la infraestructura y la presentación de las películas.
-          first_loading_provider.dart: Indica si alguna de las listas de películas principales aún está vacía, retornando true si es así, o false si todas están cargadas.
-          movie_details_provider.dart: Gestiona un mapa de películas en el estado. Permite cargar detalles de una película a partir de su ID usando un callback proporcionado, y actualiza el estado si la película no está ya presente.
-          movies_providers.dart: El nowPlayingMoviesProvider es un proveedor de Riverpod que utiliza MoviesNotifier para gestionar y actualizar una lista de películas en cartelera, cargando nuevas películas de manera paginada.
+          movies_details_provider.dart: Gestiona un mapa de películas en el estado. Permite cargar detalles de una película a partir de su ID usando un callback proporcionado, y actualiza el estado si la película no está ya presente.
+          movies_provider.dart: El nowPlayingMoviesProvider es un proveedor de Riverpod que utiliza MoviesNotifier para gestionar y actualizar una lista de películas en cartelera, cargando nuevas películas de manera paginada.
           movies_repository_provider.dart: Es un proveedor de Riverpod que crea e inicializa una instancia de MovieRepositoryImpl usando MovieDatasourceImpl.
           movies_slideshow_provider.dart: El moviesSlideshowProvider es un proveedor que devuelve las primeras seis películas en cartelera observando el nowPlayingMoviesProvider. Si no hay películas, devuelve una lista vacía.
       search: Directorio que contiene las conexiones entre la infraestructura y la presentación del SearchDelegate.

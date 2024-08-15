@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cinemapedia/presentation/providers/providers.dart';
-import 'package:cinemapedia/presentation/delegates/search_movie_delegate.dart';
+import 'package:cinemapedia/presentation/delegates/search_movies_delegate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //* Un widget personalizado que representa la barra de aplicaciones de la parte superior.
@@ -34,7 +34,7 @@ class CustomAppbar extends ConsumerWidget {
                   showSearch(
                     query: searchQuery, // Inicializa la búsqueda con la consulta actual.
                     context: context,
-                    delegate: SearchMovieDelegate(
+                    delegate: SearchMoviesDelegate(
                       initialMovies: searchedMovies, // Proporciona las películas iniciales para la búsqueda.
                       //* Funcionalidad que conserva la query de búsqueda en el label al salir del SearchMovieDelegate
                       searchMovies: ref.read(searchedMoviesProvider.notifier).searchMoviesByQuery, // Función de búsqueda que actualiza la lista de películas según la consulta.

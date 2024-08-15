@@ -1,8 +1,8 @@
-import 'movies_providers.dart';
+import '../movies/movies_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart'; // Importa Riverpod para la gestión del estado.
 
 //* Proveedor que indica si es la primera carga de datos de películas.
-final firstLoadingProvider = Provider<bool>((ref) {
+final screenLoaderProvider = Provider<bool>((ref) {
   final step1 = ref.watch(nowPlayingMoviesProvider).isEmpty; // Verifica si la lista de películas de "ahora en cines" está vacía.
   final step2 = ref.watch(upcomingMoviesProvider).isEmpty; // Verifica si la lista de películas de "próximamente" está vacía.
   final step3 = ref.watch(popularMoviesProvider).isEmpty; // Verifica si la lista de películas populares está vacía.

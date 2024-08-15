@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart'; // Importa widgets básicos de Flutter.
 import 'package:cinemapedia/domain/entities/movie.dart'; // Importa la entidad Movie.
-import 'package:cinemapedia/config/helpers/human_formats.dart'; // Importa helper para formatos de números.
+import 'package:cinemapedia/config/helpers/formats.dart'; // Importa helper para formatos de números.
 import 'package:go_router/go_router.dart'; // Importa go_router para la navegación.
 import 'package:animate_do/animate_do.dart'; // Importa animate_do para animaciones.
 
@@ -156,9 +156,9 @@ class _SlideCustomWidget extends StatelessWidget {
               children: [
                 Icon(Icons.star_half_outlined, color: Colors.yellow.shade800), // Icono de estrella para la calificación.
                 const SizedBox(width: 3), // Espaciado entre el icono y el texto de la calificación.
-                Text(HumanFormats.number(movie.voteAverage, 1), style: textStyles.bodyMedium?.copyWith(color: Colors.yellow.shade800)), // Calificación de la película.
+                Text(Formats.number(movie.voteAverage, 1), style: textStyles.bodyMedium?.copyWith(color: Colors.yellow.shade800)), // Calificación de la película.
                 const Spacer(), // Espacio flexible para separar la calificación de la popularidad.
-                Text(HumanFormats.number(movie.popularity), style: textStyles.bodySmall) // Popularidad de la película.
+                Text(Formats.number(movie.popularity), style: textStyles.bodySmall) // Popularidad de la película.
               ],
             ),
           ),

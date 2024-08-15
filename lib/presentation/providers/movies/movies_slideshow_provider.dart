@@ -1,4 +1,4 @@
-import 'movies_providers.dart';
+import 'movies_provider.dart';
 import 'package:cinemapedia/domain/entities/movie.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart'; // Importa Riverpod para la gestión del estado.
 

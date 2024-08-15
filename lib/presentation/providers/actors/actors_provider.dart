@@ -3,7 +3,7 @@ import 'package:cinemapedia/presentation/providers/actors/actors_repository_prov
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //* Proveedor de estado para manejar la lista de actores por película.
-final actorsMovieProvider = StateNotifierProvider<ActorsMovieProvider, Map<String, List<Actor>>>((ref) {
+final actorsProvider = StateNotifierProvider<ActorsMovieProvider, Map<String, List<Actor>>>((ref) {
   final actorsRepository = ref.watch(actorsRepositoryProvider).getActorByMovie; // Obtiene la función getActorByMovie del repositorio de actores.
   return ActorsMovieProvider(actorsRepository); // Crea una instancia de ActorsMovieProvider con la función de obtención de actores.
 });

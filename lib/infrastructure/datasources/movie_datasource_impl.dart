@@ -21,7 +21,7 @@ class MovieDatasourceImpl extends MoviesDatasource {
 
   //* Convierte la respuesta JSON de la API en una lista de objetos `Movie`. Filtra las películas que no tienen un póster y las convierte usando el mapeador `MovieMapper`.
   List<Movie> _jsonToMovies(Map<String, dynamic> json) {
-    final movieDBResponse = MovieDbResponse.fromJson(json); // Convierte JSON en un objeto `MovieDbResponse`.
+    final movieDBResponse = MoviesResponse.fromJson(json); // Convierte JSON en un objeto `MovieDbResponse`.
     final List<Movie> movies = movieDBResponse.results
         .where((moviedb) => moviedb.posterPath != 'no-poster') // Filtra películas sin póster.
         .map((moviedb) => MovieMapper.movieDBToEntity(moviedb)) // Mapea a objetos `Movie`.
@@ -62,7 +62,7 @@ class MovieDatasourceImpl extends MoviesDatasource {
   Future<Movie> getMovieById(String id) async {
     final response = await dio.get('/movie/$id');
     if (response.statusCode != 200) throw Exception('Movie with id: $id not found'); // Manejo de errores.
-    final movieDetails = MovieDetails.fromJson(response.data); // Convierte JSON en `MovieDetails`.
+    final movieDetails = DetailsResponse.fromJson(response.data); // Convierte JSON en `MovieDetails`.
     final Movie movie = MovieMapper.movieDetailsToEntity(movieDetails); // Mapea a objeto `Movie`.
     return movie;
   }

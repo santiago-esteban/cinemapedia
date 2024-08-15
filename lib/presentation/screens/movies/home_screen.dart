@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
         children: viewRoutes, // Lista de vistas disponibles.
       ),
       //* Barra de navegación personalizada en la parte inferior de la pantalla.
-      bottomNavigationBar: CustomNavigationBar(currentIndex: pageIndex),
+      bottomNavigationBar: CustomNavigationbar(currentIndex: pageIndex),
     );
   }
 }

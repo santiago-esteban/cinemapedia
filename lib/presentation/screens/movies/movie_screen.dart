@@ -22,7 +22,7 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
     super.initState();
     // Inicializa la carga de la película y actores al iniciar la pantalla.
     ref.read(movieInfoProvider.notifier).loadMovie(movieId: widget.movieId);
-    ref.read(actorsMovieProvider.notifier).loadActors(movieId: widget.movieId);
+    ref.read(actorsProvider.notifier).loadActors(movieId: widget.movieId);
   }
 
   @override
@@ -188,7 +188,7 @@ class _ActorsMovie extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final actorsMovie = ref.watch(actorsMovieProvider); // Obtiene la lista de actores del proveedor.
+    final actorsMovie = ref.watch(actorsProvider); // Obtiene la lista de actores del proveedor.
     if (actorsMovie[movieId] == null) {
       // Muestra un indicador de carga si los actores aún no están disponibles.
       return const CircularProgressIndicator(strokeWidth: 2);
