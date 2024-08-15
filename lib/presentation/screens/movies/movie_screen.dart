@@ -53,12 +53,12 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
 }
 
 //* Widget personalizado que muestra una barra de aplicación con una imagen de fondo de la película.
-class _CustomSliverAppBar extends StatelessWidget {
+class _CustomSliverAppBar extends ConsumerWidget {
   final Movie movie; // Información de la película.
   const _CustomSliverAppBar({required this.movie}); // Constructor con película requerida.
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size; // Obtiene el tamaño de la pantalla.
     //* Fondo de la pantalla
     return SliverAppBar(
@@ -68,7 +68,7 @@ class _CustomSliverAppBar extends StatelessWidget {
       actions: [
         IconButton(
             onPressed: () {
-              //TODO: Realizar el toggle
+              ref.watch(isarRepositoryProvider).toggleFavorite(movie);
             },
             icon: const Icon(Icons.favorite_border))
         // icon: const Icon(Icons.favorite_rounded, color: Colors.red))

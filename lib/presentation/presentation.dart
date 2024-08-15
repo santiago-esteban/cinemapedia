@@ -5,7 +5,7 @@ export 'delegates/search_movies_delegate.dart';
 export 'providers/actors/actors_provider.dart';
 export 'providers/actors/actors_repository_provider.dart';
 export 'providers/loaders/screen_loader_provider.dart';
-export 'providers/local/local_repository_provider.dart';
+export 'providers/isar/isar_repository_provider.dart';
 export 'providers/movies/movies_details_provider.dart';
 export 'providers/movies/movies_provider.dart';
 export 'providers/movies/movies_repository_provider.dart';
