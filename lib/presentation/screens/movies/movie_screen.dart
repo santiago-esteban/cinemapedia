@@ -70,6 +70,7 @@ class _CustomSliverAppBar extends ConsumerWidget {
         IconButton(
           onPressed: () {
             ref.read(isarFavoriteProvider(movie.id).notifier).toggleFavorite(movie);
+            ref.read(isarFavoriteMoviesProvider.notifier).toggleFavorite(movie);
           },
           icon: isFavorite ? const Icon(Icons.favorite_rounded, size: 30, color: Colors.red) : const Icon(Icons.favorite_border, size: 30),
         ),
