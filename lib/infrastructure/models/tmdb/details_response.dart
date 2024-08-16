@@ -71,7 +71,7 @@ class DetailsResponse {
         originalTitle: json["original_title"],
         overview: json["overview"],
         popularity: json["popularity"]?.toDouble(),
-        posterPath: json["poster_path"],
+        posterPath: json["poster_path"] ?? '',
         productionCompanies: List<ProductionCompany>.from(json["production_companies"].map((x) => ProductionCompany.fromJson(x))),
         productionCountries: List<ProductionCountry>.from(json["production_countries"].map((x) => ProductionCountry.fromJson(x))),
         releaseDate: json["release_date"] != null ? DateTime.tryParse(json["release_date"]) : null,
@@ -135,8 +135,8 @@ class BelongsToCollection {
   factory BelongsToCollection.fromJson(Map<String, dynamic> json) => BelongsToCollection(
         id: json["id"],
         name: json["name"],
-        posterPath: json["poster_path"],
-        backdropPath: json["backdrop_path"],
+        posterPath: json["poster_path"] ?? '',
+        backdropPath: json["backdrop_path"] ?? '',
       );
 
   // Método para convertir una instancia de BelongsToCollection a JSON.

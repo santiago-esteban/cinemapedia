@@ -1,3 +1,4 @@
+import 'package:cinemapedia/presentation/providers/isar/isar_favorite_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:cinemapedia/domain/domain.dart';
 import 'package:cinemapedia/presentation/presentation.dart';
@@ -52,57 +53,60 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
   }
 }
 
-//* Widget personalizado que muestra una barra de aplicación con una imagen de fondo de la película.
+//* Define el StateNotifierProvider.family para gestionar el estado de favoritos
+final isFavoriteProvider = StateNotifierProvider.family.autoDispose<FavoriteNotifier, bool, int>((ref, movieId) {
+  final isarRepository = ref.watch(isarRepositoryProvider);
+  return FavoriteNotifier(isarRepository, movieId);
+});
+
+//* Widget personalizado que muestra una barra de aplicación con una imagen de fondo.
 class _CustomSliverAppBar extends ConsumerWidget {
-  final Movie movie; // Información de la película.
-  const _CustomSliverAppBar({required this.movie}); // Constructor con película requerida.
+  final Movie movie;
+  const _CustomSliverAppBar({required this.movie});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final size = MediaQuery.of(context).size; // Obtiene el tamaño de la pantalla.
-    //* Fondo de la pantalla
+    final isFavorite = ref.watch(isFavoriteProvider(movie.id));
+    final size = MediaQuery.of(context).size;
+
     return SliverAppBar(
-      backgroundColor: Colors.black, // Color de fondo de la AppBar.
-      expandedHeight: size.height * 0.7, // Altura expandida de la AppBar.
-      foregroundColor: Colors.white, // Color del texto de la AppBar.
+      backgroundColor: Colors.black,
+      expandedHeight: size.height * 0.7,
+      foregroundColor: Colors.white,
       actions: [
         IconButton(
-            onPressed: () {
-              ref.watch(isarRepositoryProvider).toggleFavorite(movie);
-            },
-            icon: const Icon(Icons.favorite_border))
-        // icon: const Icon(Icons.favorite_rounded, color: Colors.red))
+          onPressed: () {
+            ref.read(isFavoriteProvider(movie.id).notifier).toggleFavorite(movie);
+          },
+          icon: isFavorite ? const Icon(Icons.favorite_rounded, size: 30, color: Colors.red) : const Icon(Icons.favorite_border, size: 30),
+        ),
       ],
       flexibleSpace: FlexibleSpaceBar(
-        titlePadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5), // Padding alrededor del título.
+        titlePadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         background: Stack(
           children: [
-            //* Contenido del fondo de la pantalla
             SizedBox.expand(
-              //* Imagen del póster del fondo de la pantalla
               child: Image.network(
                 movie.posterPath,
-                fit: BoxFit.cover, // Ajuste de la imagen para cubrir el fondo.
+                fit: BoxFit.cover,
                 loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress != null) return const SizedBox(); // Muestra un espacio en blanco mientras se carga la imagen.
-                  return FadeIn(child: child); // Muestra la imagen con efecto de desvanecimiento.
+                  if (loadingProgress != null) return const SizedBox();
+                  return FadeIn(child: child);
                 },
               ),
             ),
-            //* Gradiente superior central
             _CustomGradient(
               beginAlign: Alignment.bottomCenter,
               endAlign: Alignment.topCenter,
               stops: const [0.8, 1.0],
               colors: const [Colors.transparent, Colors.black54],
             ),
-            //* Gradiente inferior central
             _CustomGradient(
               beginAlign: Alignment.topCenter,
               endAlign: Alignment.bottomCenter,
               stops: const [0.8, 1.0],
               colors: const [Colors.transparent, Colors.black54],
-            )
+            ),
           ],
         ),
       ),

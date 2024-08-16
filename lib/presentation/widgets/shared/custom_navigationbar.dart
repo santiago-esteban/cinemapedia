@@ -28,25 +28,25 @@ class CustomNavigationbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      currentIndex: currentIndex, // Establece la vista seleccionada actualmente.
-      onTap: (value) => onItemTapped(context, value), // Llama al método onItemTapped cuando se toca una vista.
+    return NavigationBar(
+      selectedIndex: currentIndex, // Establece la vista seleccionada actualmente.
+      onDestinationSelected: (value) => onItemTapped(context, value), // Llama al método onItemTapped cuando se toca una vista.
       elevation: 0, // Elimina la sombra debajo de la barra de navegación.
-      items: const [
+      destinations: const [
         //* "Inicio"
-        BottomNavigationBarItem(
+        NavigationDestination(
           icon: Icon(Icons.home_max), // Icono para la vista "Inicio".
           label: 'Inicio', // Etiqueta para la vista "Inicio".
         ),
 
         //* "Categorías"
-        BottomNavigationBarItem(
+        NavigationDestination(
           icon: Icon(Icons.label_outline), // Icono para la vista "Categorías".
           label: 'Categorías', // Etiqueta para la vista "Categorías".
         ),
 
         //* "Favoritos"
-        BottomNavigationBarItem(
+        NavigationDestination(
           icon: Icon(Icons.favorite_outline), // Icono para la vista "Favoritos".
           label: 'Favoritos', // Etiqueta para la vista "Favoritos".
         ),
