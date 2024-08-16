@@ -2,16 +2,16 @@ import 'package:cinemapedia/domain/domain.dart';
 import 'package:cinemapedia/presentation/providers/isar/isar_repository_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final isarFavoriteViewProvider = StateNotifierProvider<FavoriteViewNotifier, Map<int, Movie>>((ref) {
+final isarFavoriteMoviesProvider = StateNotifierProvider<FavoriteMoviesNotifier, Map<int, Movie>>((ref) {
   final isarRepository = ref.watch(isarRepositoryProvider);
-  return FavoriteViewNotifier(isarRepository: isarRepository);
+  return FavoriteMoviesNotifier(isarRepository: isarRepository);
 });
 
-class FavoriteViewNotifier extends StateNotifier<Map<int, Movie>> {
+class FavoriteMoviesNotifier extends StateNotifier<Map<int, Movie>> {
   int page = 0;
   final IsarRepository isarRepository;
 
-  FavoriteViewNotifier({required this.isarRepository}) : super({});
+  FavoriteMoviesNotifier({required this.isarRepository}) : super({});
 
   Future<void> loadNextPage() async {
     final movies = await isarRepository.loadMovies(offset: page * 10);
