@@ -1,4 +1,3 @@
-import 'package:cinemapedia/presentation/providers/isar/isar_favorite_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:cinemapedia/domain/domain.dart';
 import 'package:cinemapedia/presentation/presentation.dart';
@@ -53,12 +52,6 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
   }
 }
 
-//* Define el StateNotifierProvider.family para gestionar el estado de favoritos
-final isFavoriteProvider = StateNotifierProvider.family.autoDispose<FavoriteNotifier, bool, int>((ref, movieId) {
-  final isarRepository = ref.watch(isarRepositoryProvider);
-  return FavoriteNotifier(isarRepository, movieId);
-});
-
 //* Widget personalizado que muestra una barra de aplicación con una imagen de fondo.
 class _CustomSliverAppBar extends ConsumerWidget {
   final Movie movie;
@@ -66,7 +59,7 @@ class _CustomSliverAppBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isFavorite = ref.watch(isFavoriteProvider(movie.id));
+    final isFavorite = ref.watch(isarFavoriteProvider(movie.id));
     final size = MediaQuery.of(context).size;
 
     return SliverAppBar(
@@ -76,7 +69,7 @@ class _CustomSliverAppBar extends ConsumerWidget {
       actions: [
         IconButton(
           onPressed: () {
-            ref.read(isFavoriteProvider(movie.id).notifier).toggleFavorite(movie);
+            ref.read(isarFavoriteProvider(movie.id).notifier).toggleFavorite(movie);
           },
           icon: isFavorite ? const Icon(Icons.favorite_rounded, size: 30, color: Colors.red) : const Icon(Icons.favorite_border, size: 30),
         ),

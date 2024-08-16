@@ -2,7 +2,7 @@ import 'package:cinemapedia/domain/domain.dart';
 import 'package:cinemapedia/presentation/presentation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final isFavoriteProvider = StateNotifierProvider.family<FavoriteNotifier, bool, int>((ref, movieId) {
+final isarFavoriteProvider = StateNotifierProvider.family<FavoriteNotifier, bool, int>((ref, movieId) {
   final isarRepository = ref.watch(isarRepositoryProvider);
   return FavoriteNotifier(isarRepository, movieId);
 });
