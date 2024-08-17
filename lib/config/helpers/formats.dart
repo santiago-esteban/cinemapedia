@@ -1,6 +1,6 @@
 // Importa la librería para formatear números y fechas de manera internacional.
-import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 
 //* Clase que maneja el formateo de números en un formato más legible para los humanos.
 class Formats {

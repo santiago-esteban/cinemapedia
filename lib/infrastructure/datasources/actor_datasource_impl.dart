@@ -1,6 +1,6 @@
 // Importa las librerías y clases necesarias para la implementación del datasource de actores.
-import 'package:cinemapedia/domain/domain.dart';
 import 'package:cinemapedia/config/config.dart';
+import 'package:cinemapedia/domain/domain.dart';
 import 'package:cinemapedia/infrastructure/infrastructure.dart';
 import 'package:dio/dio.dart';
 
