@@ -28,7 +28,7 @@ class ActorDatasourceImpl extends ActorsDatasource {
     final castResponse = CreditsResponse.fromJson(response.data);
 
     // Mapea los datos de los actores desde el formato de la API a la entidad `Actor`.
-    List<Actor> actors = castResponse.cast.map((cast) => ActorMapper.castDBToEntity(cast)).toList();
+    List<Actor> actors = castResponse.cast.map((cast) => ActorMapper.castToEntity(cast)).toList();
 
     // Retorna la lista de actores.
     return actors;

@@ -5,7 +5,7 @@ import 'package:cinemapedia/infrastructure/infrastructure.dart';
 //* Clase encargada de mapear datos de actores desde el modelo de la API a la entidad de la aplicación.
 class ActorMapper {
   //* Convierte un objeto `Cast` (del modelo de la API) a una entidad `Actor`.
-  static Actor castDBToEntity(Cast cast) => Actor(
+  static Actor castToEntity(Cast cast) => Actor(
         id: cast.id, // Identificador del actor.
         name: cast.name, // Nombre del actor.
         profilePath: cast.profilePath != null

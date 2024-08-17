@@ -19,10 +19,10 @@ class MovieDatasourceImpl extends MoviesDatasource {
 
   //* Convierte la respuesta JSON de la API en una lista de objetos `Movie`. Filtra las películas que no tienen un póster y las convierte usando el mapeador `MovieMapper`.
   List<Movie> _jsonToMovies(Map<String, dynamic> json) {
-    final movieDBResponse = MoviesResponse.fromJson(json); // Convierte JSON en un objeto `MovieDbResponse`.
-    final List<Movie> movies = movieDBResponse.results
+    final movieResponse = MoviesResponse.fromJson(json); // Convierte JSON en un objeto `MovieDbResponse`.
+    final List<Movie> movies = movieResponse.results
         .where((moviedb) => moviedb.posterPath != 'no-poster') // Filtra películas sin póster.
-        .map((moviedb) => MovieMapper.movieDBToEntity(moviedb)) // Mapea a objetos `Movie`.
+        .map((moviedb) => MovieMapper.movieToEntity(moviedb)) // Mapea a objetos `Movie`.
         .toList();
     return movies;
   }
@@ -82,16 +82,14 @@ class MovieDatasourceImpl extends MoviesDatasource {
   @override
   Future<List<Video>> getYoutubeVideosById(int movieId) async {
     final response = await dio.get('/movie/$movieId/videos');
-    final moviedbVideosReponse = VideosResponse.fromJson(response.data);
+    final movieVideosReponse = VideosResponse.fromJson(response.data);
     final videos = <Video>[];
-
-    for (final moviedbVideo in moviedbVideosReponse.results) {
+    for (final moviedbVideo in movieVideosReponse.results) {
       if (moviedbVideo.site == 'YouTube') {
         final video = VideoMapper.moviedbVideoToEntity(moviedbVideo);
         videos.add(video);
       }
     }
-
     return videos;
   }
 }

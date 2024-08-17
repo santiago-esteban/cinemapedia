@@ -5,7 +5,7 @@ import 'package:cinemapedia/infrastructure/infrastructure.dart';
 //* Clase responsable de convertir datos de películas desde el formato de la API a entidades utilizadas en la aplicación.
 class MovieMapper {
   //* Mapea un objeto `MovieMovieDB` (modelo de la API) a una entidad `Movie`.
-  static Movie movieDBToEntity(MovieResponse moviedb) => Movie(
+  static Movie movieToEntity(MovieResponse moviedb) => Movie(
         adult: moviedb.adult, // Indica si la película es para adultos.
         backdropPath: (moviedb.backdropPath != '')
             ? 'https://image.tmdb.org/t/p/w500/${moviedb.backdropPath}' // URL del fondo de la película.
