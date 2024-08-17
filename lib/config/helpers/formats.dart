@@ -6,12 +6,16 @@ import 'package:intl/date_symbol_data_local.dart';
 class Formats {
   //* Formatea un número de tipo double en un formato compacto, con una cantidad opcional de decimales.
   static String number(double number, [int decimals = 0]) {
-    final formattedNumber = NumberFormat.compactCurrency(
+    return NumberFormat.compactCurrency(
       decimalDigits: decimals,
       symbol: '', // No se incluye un símbolo de moneda.
       locale: 'en', // Se usa la configuración regional en inglés.
     ).format(number);
-    return formattedNumber;
+  }
+
+  static String shortDate(DateTime date) {
+    final format = DateFormat.yMMMEd('es');
+    return format.format(date);
   }
 
   static String formatDate(DateTime dateTime) {
