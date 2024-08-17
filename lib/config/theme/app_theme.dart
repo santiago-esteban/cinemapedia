@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class AppTheme {
   //* Método que devuelve la configuración del tema.
   ThemeData getTheme() => ThemeData(
-        useMaterial3: true, // Activa el uso de Material Design 3.
-        colorSchemeSeed: const Color(0xFF2862F5), // Color principal de la aplicación.
-      );
+      useMaterial3: true, // Activa el uso de Material Design 3.
+      colorSchemeSeed: Colors.white, // Color principal de la aplicación.
+      brightness: Brightness.dark);
 }

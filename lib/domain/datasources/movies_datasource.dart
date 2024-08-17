@@ -1,4 +1,3 @@
-// Importa la clase `Movie` que representa una película en la aplicación.
 import 'package:cinemapedia/domain/domain.dart';
 
 //* Interfaz abstracta para obtener datos sobre películas.
@@ -20,4 +19,8 @@ abstract class MoviesDatasource {
 
   // Busca películas que coincidan con una consulta de búsqueda.
   Future<List<Movie>> searchMovies(String query);
+
+  Future<List<Movie>> getSimilarMovies(int movieId);
+
+  Future<List<Video>> getYoutubeVideosById(int movieId);
 }

@@ -6,6 +6,7 @@ export 'datasources/movies_datasource.dart';
 
 export 'entities/actor.dart';
 export 'entities/movie.dart';
+export 'entities/video.dart';
 
 export 'repositories/actors_repository.dart';
 export 'repositories/isar_repository.dart';

@@ -42,4 +42,14 @@ class MovieRepositoryImpl extends MoviesRepository {
   Future<List<Movie>> searchMovies(String query) {
     return datasource.searchMovies(query);
   }
+
+  @override
+  Future<List<Movie>> getSimilarMovies(int movieId) {
+    return datasource.getSimilarMovies(movieId);
+  }
+
+  @override
+  Future<List<Video>> getYoutubeVideosById(int movieId) {
+    return datasource.getYoutubeVideosById(movieId);
+  }
 }
