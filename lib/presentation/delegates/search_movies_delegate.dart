@@ -1,9 +1,10 @@
 import 'dart:async';
+
+import 'package:animate_do/animate_do.dart';
+import 'package:cinemapedia/config/config.dart';
+import 'package:cinemapedia/domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:animate_do/animate_do.dart';
-import 'package:cinemapedia/domain/domain.dart';
-import 'package:cinemapedia/config/config.dart';
 
 //* Tipo de función para buscar películas basado en una consulta.
 typedef SearchMoviesCallback = Future<List<Movie>> Function(String query);
@@ -23,7 +24,7 @@ class SearchMoviesDelegate extends SearchDelegate<Movie?> {
   SearchMoviesDelegate({
     required this.searchMovies,
     required this.initialMovies,
-  }) : super(searchFieldLabel: 'Buscar película');
+  }) : super(searchFieldLabel: 'Buscar películas');
 
   //* Método que maneja los cambios en la consulta de búsqueda.
   void _onQueryChanged(String query) {
@@ -35,8 +36,8 @@ class SearchMoviesDelegate extends SearchDelegate<Movie?> {
     _debouncedTimer = Timer(const Duration(milliseconds: 500), () async {
       final movies = await searchMovies(query); // Realiza la búsqueda de películas.
       initialMovies = movies; // Actualiza las películas iniciales.
-      isLoadingStream.add(false); // Oculta el indicador de carga.
       debouncedMoviesStream.add(movies); // Agrega las películas encontradas al stream.
+      isLoadingStream.add(false); // Oculta el indicador de carga.
     });
   }
 
@@ -137,52 +138,54 @@ class _MovieItem extends StatelessWidget {
 
     return GestureDetector(
       onTap: () => context.go('/home/0/movie/${movie.id}'), // Navega a la página individual de la película al tocar el ítem.
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        child: Row(
-          children: [
-            //* Imagen de la película
-            SizedBox(
-              width: size.width * 0.2, // Define el ancho del contenedor de la imagen.
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10), // Redondea las esquinas de la imagen.
-                child: Image.network(
-                  movie.posterPath, // Ruta del póster de la película.
-                  loadingBuilder: (context, child, loadingProgress) {
-                    return FadeIn(
-                      child: child, // Muestra una animación de desvanecimiento mientras se carga la imagen.
-                    );
-                  },
+      child: FadeIn(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          child: Row(
+            children: [
+              //* Imagen de la película
+              SizedBox(
+                width: size.width * 0.2, // Define el ancho del contenedor de la imagen.
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10), // Redondea las esquinas de la imagen.
+                  child: FadeInImage(
+                    height: 130,
+                    fit: BoxFit.cover,
+                    image: NetworkImage(movie.posterPath),
+                    placeholder: const AssetImage('assets/loaders/bottle-loader.gif'),
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(width: 10), // Espacio entre la imagen y la descripción.
-            //* Descripción de la película
-            SizedBox(
-              width: size.width * 0.7, // Define el ancho del contenedor de la descripción.
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start, // Alinea el texto al principio de la columna.
-                children: [
-                  //* Título y descripción breve
-                  Text(movie.title, style: textStyles.titleMedium), // Muestra el título de la película con el estilo definido.
-                  // Muestra una descripción breve de la película. Si es demasiado larga, la trunca y añade "..." al final.
-                  (movie.overview.length > 100) ? Text('${movie.overview.substring(0, 100)}...') : Text(movie.overview),
 
-                  //* Estrella y valoraciones
-                  Row(
-                    children: [
-                      Icon(Icons.star_half_rounded, color: Colors.yellow.shade800), // Muestra un ícono de estrella para las valoraciones.
-                      const SizedBox(width: 5), // Espacio entre la estrella y la calificación.
-                      Text(
-                        Formats.number(movie.voteAverage, 1), // Muestra la calificación de la película formateada.
-                        style: textStyles.bodyMedium!.copyWith(color: Colors.yellow.shade900),
-                      )
-                    ],
-                  )
-                ],
+              const SizedBox(width: 10), // Espacio entre la imagen y la descripción.
+
+              //* Descripción de la película
+              SizedBox(
+                width: size.width * 0.7, // Define el ancho del contenedor de la descripción.
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start, // Alinea el texto al principio de la columna.
+                  children: [
+                    //* Título y descripción breve
+                    Text(movie.title, style: textStyles.titleMedium), // Muestra el título de la película con el estilo definido.
+                    // Muestra una descripción breve de la película. Si es demasiado larga, la trunca y añade "..." al final.
+                    (movie.overview.length > 100) ? Text('${movie.overview.substring(0, 100)}...') : Text(movie.overview),
+
+                    //* Estrella y valoraciones
+                    Row(
+                      children: [
+                        Icon(Icons.star_half_rounded, color: Colors.yellow.shade800), // Muestra un ícono de estrella para las valoraciones.
+                        const SizedBox(width: 5), // Espacio entre la estrella y la calificación.
+                        Text(
+                          Formats.number(movie.voteAverage, 1), // Muestra la calificación de la película formateada.
+                          style: textStyles.bodyMedium!.copyWith(color: Colors.yellow.shade900),
+                        )
+                      ],
+                    )
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
