@@ -1,7 +1,8 @@
 import 'dart:async';
-import 'package:flutter/material.dart';
-import 'package:cinemapedia/config/theme/app_theme.dart'; // Importa la configuración del tema de la aplicación.
+
 import 'package:cinemapedia/config/router/app_router.dart'; // Importa la configuración del enrutador de la aplicación.
+import 'package:cinemapedia/config/theme/app_theme.dart'; // Importa la configuración del tema de la aplicación.
+import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart'; // Importa el paquete para manejar variables de entorno.
 import 'package:flutter_riverpod/flutter_riverpod.dart'; // Importa Riverpod para la gestión del estado.
 
