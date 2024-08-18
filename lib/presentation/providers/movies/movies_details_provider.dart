@@ -3,9 +3,9 @@ import 'package:cinemapedia/presentation/presentation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //* Proveedor de estado para manejar la información de películas.
-final movieInfoProvider = StateNotifierProvider<MovieMapNotifier, Map<String, Movie>>((ref) {
-  final movieDetails = ref.watch(movieRepositoryProvider).getMovieById; // Obtiene la función getMovieById del repositorio de películas.
-  return MovieMapNotifier(movieDetails); // Crea una instancia de MovieMapNotifier con la función getMovieById.
+final movieDetailsProvider = StateNotifierProvider<MovieMapNotifier, Map<String, Movie>>((ref) {
+  final movieRepository = ref.watch(movieRepositoryProvider).getMovieById; // Obtiene la función getMovieById del repositorio de películas.
+  return MovieMapNotifier(movieRepository); // Crea una instancia de MovieMapNotifier con la función getMovieById.
 });
 
 typedef GetMovieCallBack = Future<Movie> Function(String movieId); // Callback para obtener una película dado un ID.

@@ -18,13 +18,13 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
   @override
   void initState() {
     super.initState();
-    ref.read(movieInfoProvider.notifier).loadMovie(movieId: widget.movieId);
+    ref.read(movieDetailsProvider.notifier).loadMovie(movieId: widget.movieId);
     ref.read(actorsMovieProvider.notifier).loadActors(widget.movieId);
   }
 
   @override
   Widget build(BuildContext context) {
-    final Movie? movie = ref.watch(movieInfoProvider)[widget.movieId];
+    final Movie? movie = ref.watch(movieDetailsProvider)[widget.movieId];
 
     if (movie == null) {
       return const Scaffold(body: Center(child: CircularProgressIndicator(strokeWidth: 2)));
