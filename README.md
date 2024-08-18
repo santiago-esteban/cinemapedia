@@ -1,6 +1,6 @@
 # CINEMAPEDIA
 
-- `DOCUMENTATION.md` archivo ubicado en la raíz del proyecto.
+- `DOCUMENTATION.md` archivo ubicado en la raíz del proyecto, contiene información muy útil sobre el objetivo de cada directorio y archivo.
 
 # DEV
 
