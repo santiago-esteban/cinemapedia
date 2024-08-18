@@ -38,9 +38,7 @@ class HomeViewState extends ConsumerState<HomeView> with AutomaticKeepAliveClien
       slivers: [
         const SliverAppBar(
           floating: true, // Mantiene la AppBar flotante.
-          flexibleSpace: FlexibleSpaceBar(
-            title: CustomAppbar(),
-          ), // Barra de aplicación personalizada.
+          flexibleSpace: CustomAppbar(), // Barra de aplicación personalizada.
         ),
         SliverList(
           delegate: SliverChildBuilderDelegate(
