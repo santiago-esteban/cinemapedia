@@ -1,8 +1,14 @@
-# ARQUITECTURA - CONCEPTOS IMPORTANTES
+# FLUJO DE INFORMACIÓN
+
+Las `vistas`, `pantallas` y los `widgets` interactúan con los `providers`, estos se conectan a los `repositorios` que, a su vez, llaman a los `datasources` para obtener los datos.
+
+---
+
+# CONCEPTOS IMPORTANTES DE LA ARQUITECTURA
 
 ## Entities / Entidades
 
-Objetos que representan datos importantes y que no cambian en diferentes partes de la aplicación o en otras aplicaciones.
+Objetos que representan datos importantes y que no cambian en diferentes partes de la aplicación.
 
 ## Datasources / Orígenes de Datos
 
@@ -22,10 +28,6 @@ Se encargan de llamar a los datasources para obtener los datos. Son flexibles pa
 
 Actúa como intermediario entre la interfaz de usuario y los repositorios. También maneja cómo se ven los cambios en la pantalla.
 
-### Flujo de Información
-
-Las pantallas (Screens) y los widgets interactúan con los Providers, estos se conectan a los Repositories que, a su vez, llaman a los Datasources para obtener los datos.
-
 ---
 
 # INFORMACIÓN DE LOS DIRECTORIOS Y CLASES
@@ -40,6 +42,7 @@ Las pantallas (Screens) y los widgets interactúan con los Providers, estos se c
   - `app_router.dart`: Aquí se definen las rutas (o caminos) para navegar dentro de la aplicación.
 - **theme**: Define el aspecto visual de la aplicación.
   - `app_theme.dart`: Contiene los colores, fuentes, y estilos de la aplicación.
+- `config.dart`: Archivo de barril que contiene todas las exportaciones de este directorio.
 
 ## DOMAIN: Define las reglas y estructura de los datos
 
