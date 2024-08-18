@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:cinemapedia/domain/domain.dart';
-import 'package:go_router/go_router.dart';
-import 'package:animate_do/animate_do.dart';
 import 'package:card_swiper/card_swiper.dart';
+import 'package:cinemapedia/domain/domain.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 //* Un widget que muestra un carrusel de películas en un `Swiper` con efectos de transición.
 class MoviesSlideshow extends StatelessWidget {
@@ -66,22 +65,13 @@ class _SlideCustomWidget extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20), // Bordes redondeados en la imagen
           //* Imagen
-          child: Image.network(
-            movie.backdropPath, // Ruta de la imagen de fondo de la película
-            fit: BoxFit.cover, // Ajusta la imagen para cubrir todo el área
-            loadingBuilder: (context, child, loadingProgress) {
-              if (loadingProgress != null) {
-                // Muestra un fondo gris claro mientras se carga la imagen
-                return const DecoratedBox(
-                  decoration: BoxDecoration(color: Colors.black12),
-                );
-              }
-              //* Navegación a la pantalla individual de la película
-              return GestureDetector(
-                onTap: () => context.push('/home/0/movie/${movie.id}'), // Navega a la pantalla de detalles de la película cuando se toca
-                child: FadeIn(child: child), // Se muestra el widget en FadeIn para un efecto de desvanecimiento
-              );
-            },
+          child: GestureDetector(
+            onTap: () => context.push('/home/0/movie/${movie.id}'),
+            child: FadeInImage(
+              fit: BoxFit.cover,
+              placeholder: const AssetImage('assets/loaders/bottle-loader.gif'),
+              image: NetworkImage(movie.backdropPath),
+            ),
           ),
         ),
       ),

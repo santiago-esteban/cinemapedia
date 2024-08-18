@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart'; // Importa widgets básicos de Flutter.
-import 'package:cinemapedia/domain/domain.dart'; // Importa la entidad Movie.
-import 'package:cinemapedia/config/config.dart'; // Importa helper para formatos de números.
-import 'package:go_router/go_router.dart'; // Importa go_router para la navegación.
 import 'package:animate_do/animate_do.dart'; // Importa animate_do para animaciones.
+import 'package:cinemapedia/domain/domain.dart'; // Importa la entidad Movie.
+import 'package:cinemapedia/presentation/presentation.dart';
+import 'package:flutter/material.dart'; // Importa widgets básicos de Flutter.
+import 'package:go_router/go_router.dart'; // Importa go_router para la navegación.
 
 //* Widget que muestra una lista horizontal de películas con título y subtítulo opcionales.
 class MoviesListview extends StatefulWidget {
@@ -83,7 +83,7 @@ class _TitleCustomWidget extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.only(top: 10), // Padding superior para el título.
-      margin: const EdgeInsets.symmetric(horizontal: 10), // Margen horizontal alrededor del contenedor del título.
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 3), // Margen horizontal alrededor del contenedor del título.
       child: Row(
         children: [
           //* Título (En cines, próximamente...)
@@ -113,31 +113,28 @@ class _SlideCustomWidget extends StatelessWidget {
     final textStyles = Theme.of(context).textTheme; // Obtiene los estilos de texto del tema.
 
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 9), // Margen horizontal alrededor de cada elemento.
+      margin: const EdgeInsets.symmetric(horizontal: 8), // Margen horizontal alrededor de cada elemento.
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           //* Imagen de la película.
           SizedBox(
-            width: 150, // Ancho de la imagen.
+            width: 150,
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(20), // Redondea las esquinas de la imagen.
-              child: Image.network(
-                movie.posterPath, // Ruta de la imagen de la película.
-                fit: BoxFit.cover, // Ajusta la imagen para cubrir el contenedor.
-                width: 150, // Ancho de la imagen.
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress != null) {
-                    return const Center(child: CircularProgressIndicator(strokeWidth: 2)); // Muestra un indicador de carga mientras la imagen se descarga.
-                  }
-                  return GestureDetector(
-                    onTap: () => context.push('/home/0/movie/${movie.id}'), // Navega a la pantalla de detalles de la película al tocar la imagen.
-                    child: FadeIn(child: child), // Aplica una animación de desvanecimiento a la imagen.
-                  );
-                },
+              borderRadius: BorderRadius.circular(20),
+              child: GestureDetector(
+                onTap: () => context.push('/home/0/movie/${movie.id}'),
+                child: FadeInImage(
+                  height: 220,
+                  fit: BoxFit.cover,
+                  placeholder: const AssetImage('assets/loaders/bottle-loader.gif'),
+                  image: NetworkImage(movie.posterPath),
+                ),
               ),
             ),
           ),
+
+          const SizedBox(height: 5),
 
           //* Título de la película.
           SizedBox(
@@ -150,18 +147,7 @@ class _SlideCustomWidget extends StatelessWidget {
           ),
 
           //* Calificación y popularidad de la película.
-          SizedBox(
-            width: 150, // Ancho del contenedor para la calificación.
-            child: Row(
-              children: [
-                Icon(Icons.star_half_outlined, color: Colors.yellow.shade800), // Icono de estrella para la calificación.
-                const SizedBox(width: 3), // Espaciado entre el icono y el texto de la calificación.
-                Text(Formats.number(movie.voteAverage, 1), style: textStyles.bodyMedium?.copyWith(color: Colors.yellow.shade800)), // Calificación de la película.
-                const Spacer(), // Espacio flexible para separar la calificación de la popularidad.
-                Text(Formats.number(movie.popularity), style: textStyles.bodySmall) // Popularidad de la película.
-              ],
-            ),
-          ),
+          MovieRating(voteAverage: movie.voteAverage),
         ],
       ),
     );

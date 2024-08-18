@@ -6,7 +6,12 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 class MovieMasonry extends StatefulWidget {
   final List<Movie> movies;
   final VoidCallback? loadNextPage;
-  const MovieMasonry({super.key, required this.movies, this.loadNextPage});
+
+  const MovieMasonry({
+    super.key,
+    required this.movies,
+    this.loadNextPage,
+  });
 
   @override
   State<MovieMasonry> createState() => _MovieMasonryState();
