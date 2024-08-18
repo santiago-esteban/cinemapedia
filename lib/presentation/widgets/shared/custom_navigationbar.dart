@@ -12,13 +12,12 @@ class CustomNavigationbar extends StatelessWidget {
 
   //* Método que maneja el toque en un ítem de la barra de navegación.
   void onItemTapped(BuildContext context, int index) {
-    context.go('home/$index'); // Navega a la ruta correspondiente según el índice.
     switch (index) {
       case 0:
         context.go('/home/0'); // Navega a la vista "Inicio".
         break;
       case 1:
-        context.go('/home/1'); // Navega a la vista "Categorías".
+        context.go('/home/1'); // Navega a la vista "Populares".
         break;
       case 2:
         context.go('/home/2'); // Navega a la vista "Favoritos".
@@ -39,10 +38,10 @@ class CustomNavigationbar extends StatelessWidget {
           label: 'Inicio', // Etiqueta para la vista "Inicio".
         ),
 
-        //* "Categorías"
+        //* "Populares"
         NavigationDestination(
-          icon: Icon(Icons.label_outline), // Icono para la vista "Categorías".
-          label: 'Categorías', // Etiqueta para la vista "Categorías".
+          icon: Icon(Icons.thumbs_up_down_outlined), // Icono para la vista "Categorías".
+          label: 'Populares', // Etiqueta para la vista "Categorías".
         ),
 
         //* "Favoritos"

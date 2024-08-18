@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:cinemapedia/domain/domain.dart';
 import 'package:cinemapedia/presentation/presentation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //* Un widget personalizado que representa la barra de aplicaciones de la parte superior.
@@ -30,7 +31,7 @@ class CustomAppbar extends ConsumerWidget {
                   //* Obtiene la consulta de búsqueda actual.
                   final searchQuery = ref.read(searchQueryProvider);
 
-                  showSearch(
+                  showSearch<Movie?>(
                     query: searchQuery, // Inicializa la búsqueda con la consulta actual.
                     context: context,
                     delegate: SearchMoviesDelegate(

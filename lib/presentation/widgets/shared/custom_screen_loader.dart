@@ -24,17 +24,17 @@ class CustomScreenLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const SizedBox(height: 10), // Espacio superior entre el indicador de progreso y el texto.
-          const CircularProgressIndicator(strokeWidth: 2), // Indicador de progreso circular.
-          const SizedBox(height: 10), // Espacio inferior entre el indicador de progreso y el texto.
+          const SizedBox(height: 50), // Espacio superior entre el indicador de progreso y el texto.
+          Image.asset('assets/loaders/bottle-loader.gif', width: size.width, fit: BoxFit.contain),
           StreamBuilder<String>(
             stream: getLoadMessages(), // Se escucha el `Stream` generado.
             builder: (context, snapshot) {
-              if (!snapshot.hasData) return const Text('Cargando...'); // Mensaje predeterminado mientras se carga el primer dato.
+              if (!snapshot.hasData) return const Text(''); // Mensaje predeterminado mientras se carga el primer dato.
               return Text(snapshot.data!); // Muestra el mensaje actual del `Stream`.
             },
           ),
