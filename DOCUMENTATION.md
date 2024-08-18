@@ -4,6 +4,10 @@ Las `vistas`, `pantallas` y los `widgets` interactúan con los `providers`, esto
 
 ---
 
+---
+
+---
+
 # CONCEPTOS IMPORTANTES DE LA ARQUITECTURA
 
 ## Entities / Entidades
@@ -27,6 +31,10 @@ Se encargan de llamar a los datasources para obtener los datos. Son flexibles pa
 ## Provider / Gestor de Estado
 
 Actúa como intermediario entre la interfaz de usuario y los repositorios. También maneja cómo se ven los cambios en la pantalla.
+
+---
+
+---
 
 ---
 
@@ -55,6 +63,7 @@ Actúa como intermediario entre la interfaz de usuario y los repositorios. Tambi
 - **repositories**: Conecta los repositorios con las fuentes de datos.
   - `actors_repository.dart`: Usa el datasource de actores para obtener la información.
   - `movies_repository.dart`: Usa el datasource de películas para obtener la información.
+- `domain.dart`: Archivo de barril que contiene todas las exportaciones de este directorio.
 
 ## INFRASTRUCTURE: Implementación de las funciones para obtener los datos
 
@@ -70,15 +79,13 @@ Actúa como intermediario entre la interfaz de usuario y los repositorios. Tambi
     - `movie_details.dart`: Representación detallada de una película.
     - `movie_moviedb.dart`: Representación de una película obtenida de la API de TMDB.
     - `moviedb_response.dart`: Estructura para manejar la respuesta de la API cuando se obtienen películas.
+- `infrastructure.dart`: Archivo de barril que contiene todas las exportaciones de este directorio.
 
 ## PRESENTATION: Parte visual y su conexión con los datos
 
 - **delegates**: Maneja la búsqueda dentro de la aplicación.
-
   - `search_movies_delegate.dart`: Código para buscar películas.
-
 - **providers**: Enlace entre la infraestructura (donde se obtienen los datos) y la presentación (lo que ve el usuario).
-
   - **actors**: Gestión de la información de los actores.
     - `actors_provider.dart`: Obtiene y maneja la lista de actores por película.
     - `actors_repository_provider.dart`: Conecta con el repositorio de actores usando Riverpod.
@@ -91,13 +98,10 @@ Actúa como intermediario entre la interfaz de usuario y los repositorios. Tambi
     - `movies_slideshow_provider.dart`: Maneja el pase de diapositivas con las películas en cartelera.
   - **search**: Conecta la funcionalidad de búsqueda con la interfaz.
     - `search_movies_provider.dart`: Maneja la búsqueda de películas, almacenando la consulta y los resultados.
-
 - **screens**: Pantallas de la aplicación.
-
   - **movies**: Pantallas relacionadas con las películas.
     - `home_screen.dart`: Pantalla principal que muestra las películas.
     - `movie_screen.dart`: Pantalla que muestra los detalles de una película específica.
-
 - **views**: Vistas específicas de las pantallas.
   - **movies**: Vistas relacionadas con las películas.
     - `categories_view.dart`: Vista de las categorías de películas.
@@ -111,3 +115,4 @@ Actúa como intermediario entre la interfaz de usuario y los repositorios. Tambi
     - `custom_appbar.dart`: Barra superior personalizada de la aplicación.
     - `custom_navigation_bar.dart`: Barra de navegación personalizada.
     - `full_screen_loader.dart`: Indicador de carga a pantalla completa.
+- `presentation.dart`: Archivo de barril que contiene todas las exportaciones de este directorio.
