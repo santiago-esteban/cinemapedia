@@ -13,10 +13,8 @@ class CreditsResponse {
   // Método para crear una instancia de CreditsResponse a partir de un JSON.
   factory CreditsResponse.fromJson(Map<String, dynamic> json) => CreditsResponse(
         id: json["id"],
-        cast: List<Cast>.from(
-            json["cast"].map((x) => Cast.fromJson(x))), // Convierte el JSON de actores en una lista de objetos Cast.
-        crew: List<Cast>.from(json["crew"]
-            .map((x) => Cast.fromJson(x))), // Convierte el JSON del equipo técnico en una lista de objetos Cast.
+        cast: List<Cast>.from(json["cast"].map((x) => Cast.fromJson(x))), // Convierte el JSON de actores en una lista de objetos Cast.
+        crew: List<Cast>.from(json["crew"].map((x) => Cast.fromJson(x))), // Convierte el JSON del equipo técnico en una lista de objetos Cast.
       );
 
   // Método para convertir una instancia de CreditsResponse a JSON.
@@ -32,8 +30,7 @@ class Cast {
   final bool adult; // Indica si la persona es adulta.
   final int gender; // Género de la persona.
   final int id; // Identificador único de la persona.
-  final String
-      knownForDepartment; // Departamento o rol por el que es conocida la persona (por ejemplo, actuación, dirección).
+  final String knownForDepartment; // Departamento o rol por el que es conocida la persona (por ejemplo, actuación, dirección).
   final String name; // Nombre de la persona.
   final String originalName; // Nombre original de la persona.
   final double popularity; // Popularidad de la persona.

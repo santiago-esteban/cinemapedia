@@ -69,6 +69,8 @@ class _MovieDetails extends StatelessWidget {
 
         //* Películas similares
         MoviesSimilar(movieId: movie.id),
+
+        const SizedBox(height: 10)
       ],
     );
   }
