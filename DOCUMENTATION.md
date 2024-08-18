@@ -54,15 +54,19 @@ Actúa como intermediario entre la interfaz de usuario y los repositorios. Tambi
 
 ## DOMAIN: Define las reglas y estructura de los datos
 
-- **datasources**: Establece las reglas para las fuentes de datos. Aquí no se obtiene directamente la información, solo se definen las reglas.
-  - `actors_datasource.dart`: Reglas para obtener datos de actores.
-  - `movies_datasource.dart`: Reglas para obtener datos de películas.
+- **datasources**: Establece las reglas para las fuentes de datos. Aquí los datasources no obtienen la información, solo definen las reglas.
+  - `actors_datasource.dart`: Reglas para la implementación del datasource de actores.
+  - `isar_datasource.dart`: Reglas para la implementación del datasource de Isar Database.
+  - `movies_datasource.dart`: Reglas para la implementación del datasource de películas.
 - **entities**: Define las clases que representan los datos principales, como actores o películas.
   - `actor.dart`: Estructura para manejar la información de los actores.
   - `movie.dart`: Estructura para manejar la información de las películas.
-- **repositories**: Conecta los repositorios con las fuentes de datos.
-  - `actors_repository.dart`: Usa el datasource de actores para obtener la información.
-  - `movies_repository.dart`: Usa el datasource de películas para obtener la información.
+  - `movie.g.dart`: Archivo generado automáticamente, para más información leer `README.md`.
+  - `video.dart`: Estructura para manejar la información de los videos.
+- **repositories**: Establece las reglas para los repositorios. Aquí los repositorios no se conectan con los datasources, solo definen las reglas.
+  - `actors_repository.dart`: Reglas para la implementación del repositorio de actores.
+  - `isar_repository.dart`: Reglas para la implementación del repositorio de Isar Database.
+  - `movies_repository.dart`: Reglas para la implementación del repositorio de películas.
 - `domain.dart`: Archivo de barril que contiene todas las exportaciones de este directorio.
 
 ## INFRASTRUCTURE: Implementación de las funciones para obtener los datos
@@ -74,7 +78,7 @@ Actúa como intermediario entre la interfaz de usuario y los repositorios. Tambi
   - `actor_mapper.dart`: Convierte datos de actores de la API al formato usado por la aplicación.
   - `movie_mapper.dart`: Convierte datos de películas de la API al formato usado por la aplicación.
 - **models**: Representan cómo se ven los datos que vienen de las APIs, facilitando su uso en la aplicación.
-  - **moviedb**: Modelos específicos de la API de TheMovieDB (TMDB).
+  - **tmdb**: Modelos específicos de la API de TheMovieDB (TMDB).
     - `credits_response.dart`: Estructura para manejar los créditos de una película (actores y equipo técnico).
     - `movie_details.dart`: Representación detallada de una película.
     - `movie_moviedb.dart`: Representación de una película obtenida de la API de TMDB.
