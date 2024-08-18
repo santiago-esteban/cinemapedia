@@ -26,6 +26,14 @@ class SearchMoviesDelegate extends SearchDelegate<Movie?> {
     required this.initialMovies,
   }) : super(searchFieldLabel: 'Buscar películas');
 
+  @override
+  void dispose() {
+    _debouncedTimer?.cancel(); // Cancela el temporizador si está activo.
+    debouncedMoviesStream.close(); // Cierra el StreamController de películas.
+    isLoadingStream.close(); // Cierra el StreamController de carga.
+    super.dispose();
+  }
+
   //* Método que maneja los cambios en la consulta de búsqueda.
   void _onQueryChanged(String query) {
     if (query.isNotEmpty) isLoadingStream.add(true); // Muestra el indicador de carga si la consulta no está vacía.
