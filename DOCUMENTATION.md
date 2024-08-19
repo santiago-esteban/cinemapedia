@@ -96,45 +96,44 @@ Actúa como intermediario entre la interfaz de usuario y los repositorios. Tambi
 
 - **delegates**: Maneja la búsqueda dentro de la aplicación.
   - `search_movies_delegate.dart`: Código para buscar películas.
-- **providers**: Enlace entre la infraestructura (donde se obtienen los datos) y la presentación (lo que ve el usuario).
+- **providers**: Enlace entre la infraestructura y la presentación.
   - **actors**: Gestión de la información de los actores.
     - `actors_provider.dart`: Obtiene y maneja la lista de actores por película.
     - `actors_repository_provider.dart`: Conecta con el repositorio de actores usando Riverpod.
   - **isar**: Gestión de la información de Isar Database.
-    - `isar_favorite_movies_provider.dart`:
-    - `isar_favorite_provider.dart`:
-    - `isar_repository_provider.dart`:
-  - **loaders**: Maneja los estados de carga (si se están cargando los datos o no).
-    - `screen_loader_provider.dart`: Verifica si las listas de películas están cargadas.
+    - `isar_favorite_movies_provider.dart`: Maneja la carga de páginas de películas favoritas y su inserción y eliminación de favoritos.
+    - `isar_repository_provider.dart`: Conecta con el repositorio de Isar Database usando Riverpod.
+  - **loaders**: Maneja los estados de carga, si ya están cargados los datos o no.
+    - `screen_loader_provider.dart`: Verifica si las listas y diapositivas de películas están cargadas.
   - **movies**: Gestión de la información de las películas.
     - `movies_details_provider.dart`: Maneja los detalles de una película específica.
-    - `movies_provider.dart`: Maneja y actualiza la lista de películas en cartelera.
+    - `movies_provider.dart`: Maneja y actualiza las listas de películas.
     - `movies_repository_provider.dart`: Conecta con el repositorio de películas usando Riverpod.
     - `movies_slideshow_provider.dart`: Maneja el pase de diapositivas con las películas en cartelera.
-  - **search**: Conecta la funcionalidad de búsqueda con la interfaz.
+  - **search**: Gestión de la funcionalidad de búsqueda de películas con la interfaz.
     - `search_movies_provider.dart`: Maneja la búsqueda de películas, almacenando la consulta y los resultados.
 - **screens**: Pantallas de la aplicación.
   - **movies**: Pantallas relacionadas con las películas.
-    - `home_screen.dart`: Pantalla principal que muestra las películas.
+    - `home_screen.dart`: Pantalla principal que muestra las vistas.
     - `movie_screen.dart`: Pantalla que muestra los detalles de una película específica.
 - **views**: Vistas específicas de las pantallas.
   - **movies**: Vistas relacionadas con las películas.
     - `favorites_view.dart`: Vista de las películas favoritas.
     - `home_view.dart`: Vista de la pantalla de inicio.
-    - `popular_view.dart`:
+    - `popular_view.dart`: Vista de las películas populares.
 - **widgets**: Componentes visuales reutilizables.
-  - **actors**:
-    - `actors_by_movie.dart`:
+  - **actors**: Widgets específicos para los actores.
+    - `actors_by_movie.dart`: Widget para mostrar la lista de actores de una película individual.
   - **movies**: Widgets específicos para las pantallas de películas.
-    - `movie_masonry.dart`:
-    - `movie_poster_link.dart`:
-    - `movie_rating.dart`:
-    - `movie_video.dart`:
-    - `movies_listview.dart`: Widget para mostrar la lista de películas en cartelera.
-    - `movies_similar.dart`:
+    - `movie_masonry.dart`: Widget para mostrar la estructura de las películas en las vistas favoritas y populares.
+    - `movie_poster_link.dart`: Widget utilizado por MovieMasonry para redirigir a la pantalla individual de la película.
+    - `movie_rating.dart`: Widget para mostrar las valoraciones de una película individual.
+    - `movie_video.dart`: Widget para mostrar el video de una película individual.
+    - `movies_listview.dart`: Widget para mostrar las listas de películas.
+    - `movies_similar.dart`: Widget para mostrar las películas similares a una película individual.
     - `movies_slideshow.dart`: Widget para mostrar un pase de diapositivas de las películas.
   - **shared**: Widgets que se usan en toda la aplicación.
     - `custom_appbar.dart`: Barra superior personalizada de la aplicación.
-    - `custom_navigationbar.dart`: Barra de navegación personalizada.
-    - `custom_screen_loader.dart`: Indicador de carga a pantalla completa.
+    - `custom_navigationbar.dart`: Barra de navegación personalizada de la aplicación.
+    - `custom_screen_loader.dart`: Indicador inicial de carga a pantalla completa.
 - `presentation.dart`: Archivo de barril que contiene todas las exportaciones de este directorio.

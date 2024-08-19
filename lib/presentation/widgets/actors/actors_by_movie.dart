@@ -12,7 +12,7 @@ class ActorsByMovie extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     final actorsByMovie = ref.watch(actorsMovieProvider);
 
-    //* Loading actors
+    //* Cargando actores
     if (actorsByMovie[movieId] == null) {
       return Container(
         height: 100,
