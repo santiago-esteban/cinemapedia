@@ -1,8 +1,8 @@
-// Importa la clase `Actor` que representa a un actor en la aplicación.
+//* Importa la clase `Actor` que representa a un actor en la aplicación.
 import 'package:cinemapedia/domain/domain.dart';
 
 //* Interfaz abstracta para obtener datos sobre actores.
 abstract class ActorsDatasource {
-  // Método para obtener una lista de actores basados en el ID de una película. Este método es asíncrono y devuelve una lista de actores.
+  //* Obtiene una lista de actores basados en el ID de una película.
   Future<List<Actor>> getActorByMovie(String movieId);
 }
