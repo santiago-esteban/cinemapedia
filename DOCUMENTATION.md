@@ -71,18 +71,25 @@ Actúa como intermediario entre la interfaz de usuario y los repositorios. Tambi
 
 ## INFRASTRUCTURE: Implementación de las funciones para obtener los datos
 
-- **datasources**: Aquí es donde se escribe el código para conectar con APIs o bases de datos.
-  - `actor_datasource_impl.dart`: Código que obtiene los actores desde una API.
-  - `movie_datasource_impl.dart`: Código que obtiene las películas en cartelera desde una API.
+- **datasources**: Aquí está ubicado el código que conecta con las APIs o las bases de datos.
+  - `actor_datasource_impl.dart`: Código que obtiene los actores desde una API con peticiones HTTP.
+  - `isar_datasource_impl.dart`: Código que maneja los datos de Isar Database, una base de datos local.
+  - `movie_datasource_impl.dart`: Código que obtiene las películas desde una API con peticiones HTTP.
 - **mappers**: Transforman los datos obtenidos de las APIs en el formato que necesita la aplicación.
   - `actor_mapper.dart`: Convierte datos de actores de la API al formato usado por la aplicación.
   - `movie_mapper.dart`: Convierte datos de películas de la API al formato usado por la aplicación.
+  - `video_mapper.dart`: Convierte datos de videos de la API al formato usado por la aplicación.
 - **models**: Representan cómo se ven los datos que vienen de las APIs, facilitando su uso en la aplicación.
   - **tmdb**: Modelos específicos de la API de TheMovieDB (TMDB).
-    - `credits_response.dart`: Estructura para manejar los créditos de una película (actores y equipo técnico).
-    - `movie_details.dart`: Representación detallada de una película.
-    - `movie_moviedb.dart`: Representación de una película obtenida de la API de TMDB.
-    - `moviedb_response.dart`: Estructura para manejar la respuesta de la API cuando se obtienen películas.
+    - `credits_response.dart`: Representación de los créditos de una película individual obtenida de la API de TMDB.
+    - `details_response.dart`: Representación detallada de una película individual obtenida de la API de TMDB.
+    - `movie_response.dart`: Representación de una película individual obtenida de la API de TMDB.
+    - `movies_response.dart`: Representación de una lista de películas obtenidas de la API de TMDB.
+    - `videos_response.dart`: Representación de los videos asociados a una película obtenidos de la API de TMDB.
+- **repositories**: Estas clases son las que se implementan directamente en la capa de presentación para obtener y manejar los datos.
+  - `actor_repository_impl.dart`: Repositorio que se conecta a los datasource de los actores.
+  - `isar_repository_impl.dart`: Repositorio que se conecta a los datasource de Isar Database.
+  - `movie_repository_impl.dart`: Repositorio que se conecta a los datasource de las películas.
 - `infrastructure.dart`: Archivo de barril que contiene todas las exportaciones de este directorio.
 
 ## PRESENTATION: Parte visual y su conexión con los datos
