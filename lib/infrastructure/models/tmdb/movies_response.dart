@@ -1,8 +1,8 @@
+//* Importa la clase MovieResponse, que representa los datos de una película obtenida de MovieDB.
 import 'movie_response.dart';
 
 //* Clase que representa la respuesta de una consulta a la API de MovieDB.
 class MoviesResponse {
-  //* Constructor de la clase.
   MoviesResponse({
     required this.dates,
     required this.page,
@@ -11,11 +11,11 @@ class MoviesResponse {
     required this.totalResults,
   });
 
-  final Dates? dates; // Rango de fechas de las películas en la respuesta, puede ser nulo.
-  final int page; // Número de página de la respuesta actual.
-  final List<MovieResponse> results; // Lista de películas en la respuesta.
-  final int totalPages; // Número total de páginas disponibles.
-  final int totalResults; // Número total de resultados disponibles.
+  final Dates? dates;
+  final int page;
+  final List<MovieResponse> results;
+  final int totalPages;
+  final int totalResults;
 
   //* Método para crear una instancia de MoviesResponse a partir de un JSON.
   factory MoviesResponse.fromJson(Map<String, dynamic> json) => MoviesResponse(
@@ -38,24 +38,23 @@ class MoviesResponse {
 
 //* Clase que representa un rango de fechas.
 class Dates {
-  //* Constructor de la clase.
   Dates({
     required this.maximum,
     required this.minimum,
   });
 
-  final DateTime maximum; // Fecha máxima del rango.
-  final DateTime minimum; // Fecha mínima del rango.
+  final DateTime maximum;
+  final DateTime minimum;
 
   //* Método para crear una instancia de Dates a partir de un JSON.
   factory Dates.fromJson(Map<String, dynamic> json) => Dates(
-        maximum: DateTime.parse(json["maximum"]), // Convierte la fecha máxima a DateTime.
-        minimum: DateTime.parse(json["minimum"]), // Convierte la fecha mínima a DateTime.
+        maximum: DateTime.parse(json["maximum"]),
+        minimum: DateTime.parse(json["minimum"]),
       );
 
   //* Método para convertir una instancia de Dates a JSON.
   Map<String, dynamic> toJson() => {
-        "maximum": "${maximum.year.toString().padLeft(4, '0')}-${maximum.month.toString().padLeft(2, '0')}-${maximum.day.toString().padLeft(2, '0')}", // Formatea la fecha máxima como 'yyyy-MM-dd'.
-        "minimum": "${minimum.year.toString().padLeft(4, '0')}-${minimum.month.toString().padLeft(2, '0')}-${minimum.day.toString().padLeft(2, '0')}", // Formatea la fecha mínima como 'yyyy-MM-dd'.
+        "maximum": "${maximum.year.toString().padLeft(4, '0')}-${maximum.month.toString().padLeft(2, '0')}-${maximum.day.toString().padLeft(2, '0')}",
+        "minimum": "${minimum.year.toString().padLeft(4, '0')}-${minimum.month.toString().padLeft(2, '0')}-${minimum.day.toString().padLeft(2, '0')}",
       };
 }

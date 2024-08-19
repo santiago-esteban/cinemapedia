@@ -1,11 +1,12 @@
-// Importaciones necesarias para el repositorio de películas.
+//* Importaciones necesarias para el repositorio de películas.
 import 'package:cinemapedia/domain/domain.dart';
 
 //* Implementación del repositorio de películas.
 class MovieRepositoryImpl extends MoviesRepository {
-  final MoviesDatasource datasource; // Instancia del datasource que proporcionará los datos de las películas.
+  final MoviesDatasource datasource;
 
-  MovieRepositoryImpl(this.datasource); // Constructor que inicializa el datasource.
+  //* Constructor que inicializa el datasource.
+  MovieRepositoryImpl(this.datasource);
 
   //* Método para obtener la lista de películas que están en cartelera.
   @override
@@ -43,11 +44,13 @@ class MovieRepositoryImpl extends MoviesRepository {
     return datasource.searchMovies(query);
   }
 
+  //* Método para obtener películas similares a una película específica.
   @override
   Future<List<Movie>> getSimilarMovies(int movieId) {
     return datasource.getSimilarMovies(movieId);
   }
 
+  //* Método para obtener videos de YouTube relacionados con una película específica.
   @override
   Future<List<Video>> getYoutubeVideosById(int movieId) {
     return datasource.getYoutubeVideosById(movieId);

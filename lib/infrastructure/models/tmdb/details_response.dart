@@ -1,31 +1,31 @@
 //* Clase que representa los detalles de una película.
 class DetailsResponse {
-  final bool adult; // Indica si la película es solo para adultos.
-  final String backdropPath; // Ruta del fondo de la película.
-  final BelongsToCollection? belongsToCollection; // Colección a la que pertenece la película, si aplica.
-  final int budget; // Presupuesto de la película.
-  final List<Genre> genres; // Lista de géneros a los que pertenece la película.
-  final String homepage; // Página web oficial de la película.
-  final int id; // Identificador único de la película.
-  final String? imdbId; // Identificador en IMDb, si existe.
-  final List<String>? originCountry; // Lista de países de origen.
-  final String originalLanguage; // Idioma original de la película.
-  final String originalTitle; // Título original de la película.
-  final String overview; // Resumen de la trama de la película.
-  final double popularity; // Popularidad de la película.
-  final String posterPath; // Ruta del póster de la película.
-  final List<ProductionCompany> productionCompanies; // Compañías productoras de la película.
-  final List<ProductionCountry> productionCountries; // Países donde se produjo la película.
-  final DateTime? releaseDate; // Fecha de estreno de la película.
-  final int revenue; // Ingresos generados por la película.
-  final int runtime; // Duración de la película en minutos.
-  final List<SpokenLanguage> spokenLanguages; // Idiomas hablados en la película.
-  final String status; // Estado actual de la película (por ejemplo, 'Released').
-  final String tagline; // Lema o frase promocional de la película.
-  final String title; // Título de la película.
-  final bool video; // Indica si la película es un video.
-  final double voteAverage; // Promedio de valoraciones de la película.
-  final int voteCount; // Número de valoraciones que ha recibido la película.
+  final bool adult;
+  final String backdropPath;
+  final BelongsToCollection? belongsToCollection;
+  final int budget;
+  final List<Genre> genres;
+  final String homepage;
+  final int id;
+  final String? imdbId;
+  final List<String>? originCountry;
+  final String originalLanguage;
+  final String originalTitle;
+  final String overview;
+  final double popularity;
+  final String posterPath;
+  final List<ProductionCompany> productionCompanies;
+  final List<ProductionCountry> productionCountries;
+  final DateTime? releaseDate;
+  final int revenue;
+  final int runtime;
+  final List<SpokenLanguage> spokenLanguages;
+  final String status;
+  final String tagline;
+  final String title;
+  final bool video;
+  final double voteAverage;
+  final int voteCount;
 
   DetailsResponse({
     required this.adult,
@@ -119,10 +119,10 @@ class DetailsResponse {
 
 //* Clase que representa una colección a la que pertenece la película, como una saga o serie de películas.
 class BelongsToCollection {
-  final int id; // Identificador único de la colección.
-  final String name; // Nombre de la colección.
-  final String posterPath; // Ruta del póster de la colección.
-  final String backdropPath; // Ruta del fondo de la colección.
+  final int id;
+  final String name;
+  final String posterPath;
+  final String backdropPath;
 
   BelongsToCollection({
     required this.id,
@@ -131,7 +131,7 @@ class BelongsToCollection {
     required this.backdropPath,
   });
 
-  // Método para crear una instancia de BelongsToCollection a partir de un JSON.
+  //* Método para crear una instancia de BelongsToCollection a partir de un JSON.
   factory BelongsToCollection.fromJson(Map<String, dynamic> json) => BelongsToCollection(
         id: json["id"],
         name: json["name"],
@@ -139,7 +139,7 @@ class BelongsToCollection {
         backdropPath: json["backdrop_path"] ?? '',
       );
 
-  // Método para convertir una instancia de BelongsToCollection a JSON.
+  //* Método para convertir una instancia de BelongsToCollection a JSON.
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
@@ -150,21 +150,21 @@ class BelongsToCollection {
 
 //* Clase que representa un género al que pertenece la película.
 class Genre {
-  final int id; // Identificador único del género.
-  final String name; // Nombre del género.
+  final int id;
+  final String name;
 
   Genre({
     required this.id,
     required this.name,
   });
 
-  // Método para crear una instancia de Genre a partir de un JSON.
+  //* Método para crear una instancia de Genre a partir de un JSON.
   factory Genre.fromJson(Map<String, dynamic> json) => Genre(
         id: json["id"],
         name: json["name"],
       );
 
-  // Método para convertir una instancia de Genre a JSON.
+  //* Método para convertir una instancia de Genre a JSON.
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
@@ -173,10 +173,10 @@ class Genre {
 
 //* Clase que representa una compañía productora de la película.
 class ProductionCompany {
-  final int id; // Identificador único de la compañía.
-  final String? logoPath; // Ruta del logo de la compañía, si está disponible.
-  final String name; // Nombre de la compañía.
-  final String originCountry; // País de origen de la compañía.
+  final int id;
+  final String? logoPath;
+  final String name;
+  final String originCountry;
 
   ProductionCompany({
     required this.id,
@@ -185,7 +185,7 @@ class ProductionCompany {
     required this.originCountry,
   });
 
-  // Método para crear una instancia de ProductionCompany a partir de un JSON.
+  //* Método para crear una instancia de ProductionCompany a partir de un JSON.
   factory ProductionCompany.fromJson(Map<String, dynamic> json) => ProductionCompany(
         id: json["id"],
         logoPath: json["logo_path"],
@@ -193,7 +193,7 @@ class ProductionCompany {
         originCountry: json["origin_country"],
       );
 
-  // Método para convertir una instancia de ProductionCompany a JSON.
+  //* Método para convertir una instancia de ProductionCompany a JSON.
   Map<String, dynamic> toJson() => {
         "id": id,
         "logo_path": logoPath,
@@ -204,21 +204,21 @@ class ProductionCompany {
 
 //* Clase que representa un país donde se produjo la película.
 class ProductionCountry {
-  final String iso31661; // Código ISO 3166-1 del país.
-  final String name; // Nombre del país.
+  final String iso31661;
+  final String name;
 
   ProductionCountry({
     required this.iso31661,
     required this.name,
   });
 
-  // Método para crear una instancia de ProductionCountry a partir de un JSON.
+  //* Método para crear una instancia de ProductionCountry a partir de un JSON.
   factory ProductionCountry.fromJson(Map<String, dynamic> json) => ProductionCountry(
         iso31661: json["iso_3166_1"],
         name: json["name"],
       );
 
-  // Método para convertir una instancia de ProductionCountry a JSON.
+  //* Método para convertir una instancia de ProductionCountry a JSON.
   Map<String, dynamic> toJson() => {
         "iso_3166_1": iso31661,
         "name": name,
@@ -227,9 +227,9 @@ class ProductionCountry {
 
 //* Clase que representa un idioma hablado en la película.
 class SpokenLanguage {
-  final String englishName; // Nombre del idioma en inglés.
-  final String iso6391; // Código ISO 639-1 del idioma.
-  final String name; // Nombre del idioma en su forma nativa.
+  final String englishName;
+  final String iso6391;
+  final String name;
 
   SpokenLanguage({
     required this.englishName,
@@ -237,14 +237,14 @@ class SpokenLanguage {
     required this.name,
   });
 
-  // Método para crear una instancia de SpokenLanguage a partir de un JSON.
+  //* Método para crear una instancia de SpokenLanguage a partir de un JSON.
   factory SpokenLanguage.fromJson(Map<String, dynamic> json) => SpokenLanguage(
         englishName: json["english_name"],
         iso6391: json["iso_639_1"],
         name: json["name"],
       );
 
-  // Método para convertir una instancia de SpokenLanguage a JSON.
+  //* Método para convertir una instancia de SpokenLanguage a JSON.
   Map<String, dynamic> toJson() => {
         "english_name": englishName,
         "iso_639_1": iso6391,
