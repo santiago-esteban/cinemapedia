@@ -100,6 +100,10 @@ Actúa como intermediario entre la interfaz de usuario y los repositorios. Tambi
   - **actors**: Gestión de la información de los actores.
     - `actors_provider.dart`: Obtiene y maneja la lista de actores por película.
     - `actors_repository_provider.dart`: Conecta con el repositorio de actores usando Riverpod.
+  - **isar**: Gestión de la información de Isar Database.
+    - `isar_favorite_movies_provider.dart`:
+    - `isar_favorite_provider.dart`:
+    - `isar_repository_provider.dart`:
   - **loaders**: Maneja los estados de carga (si se están cargando los datos o no).
     - `screen_loader_provider.dart`: Verifica si las listas de películas están cargadas.
   - **movies**: Gestión de la información de las películas.
@@ -115,15 +119,22 @@ Actúa como intermediario entre la interfaz de usuario y los repositorios. Tambi
     - `movie_screen.dart`: Pantalla que muestra los detalles de una película específica.
 - **views**: Vistas específicas de las pantallas.
   - **movies**: Vistas relacionadas con las películas.
-    - `categories_view.dart`: Vista de las categorías de películas.
     - `favorites_view.dart`: Vista de las películas favoritas.
     - `home_view.dart`: Vista de la pantalla de inicio.
+    - `popular_view.dart`:
 - **widgets**: Componentes visuales reutilizables.
+  - **actors**:
+    - `actors_by_movie.dart`:
   - **movies**: Widgets específicos para las pantallas de películas.
+    - `movie_masonry.dart`:
+    - `movie_poster_link.dart`:
+    - `movie_rating.dart`:
+    - `movie_video.dart`:
     - `movies_listview.dart`: Widget para mostrar la lista de películas en cartelera.
+    - `movies_similar.dart`:
     - `movies_slideshow.dart`: Widget para mostrar un pase de diapositivas de las películas.
   - **shared**: Widgets que se usan en toda la aplicación.
     - `custom_appbar.dart`: Barra superior personalizada de la aplicación.
-    - `custom_navigation_bar.dart`: Barra de navegación personalizada.
-    - `full_screen_loader.dart`: Indicador de carga a pantalla completa.
+    - `custom_navigationbar.dart`: Barra de navegación personalizada.
+    - `custom_screen_loader.dart`: Indicador de carga a pantalla completa.
 - `presentation.dart`: Archivo de barril que contiene todas las exportaciones de este directorio.
