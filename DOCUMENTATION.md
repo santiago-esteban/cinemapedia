@@ -23,7 +23,7 @@ Son las fuentes de donde la aplicación obtiene los datos, como bases de datos o
 
 ## Repositories / Repositorios
 
-Se encargan de llamar a los datasources para obtener los datos. Son flexibles para que si necesitamos cambiar algo, no afecte a toda la aplicación.
+Se encargan de llamar a los datasources para obtener los datos. Son flexibles para que si necesitamos cambiar algo en los datasources, no afecte a toda la aplicación.
 
 - **Abstractos**: Son como planos que definen cómo deben funcionar los repositorios.
 - **Implementaciones**: Son las versiones específicas que siguen esos planos para trabajar con los datos.
@@ -76,9 +76,9 @@ Actúa como intermediario entre la interfaz de usuario y los repositorios. Tambi
   - `isar_datasource_impl.dart`: Código que maneja los datos de Isar Database, una base de datos local.
   - `movie_datasource_impl.dart`: Código que obtiene las películas desde una API con peticiones HTTP.
 - **mappers**: Transforman los datos obtenidos de las APIs en el formato que necesita la aplicación.
-  - `actor_mapper.dart`: Convierte datos de actores de la API al formato usado por la aplicación.
-  - `movie_mapper.dart`: Convierte datos de películas de la API al formato usado por la aplicación.
-  - `video_mapper.dart`: Convierte datos de videos de la API al formato usado por la aplicación.
+  - `actor_mapper.dart`: Convierte las peticiones de actores de la API al formato usado por la aplicación.
+  - `movie_mapper.dart`: Convierte las peticiones de películas de la API al formato usado por la aplicación.
+  - `video_mapper.dart`: Convierte las peticiones de videos de la API al formato usado por la aplicación.
 - **models**: Representan cómo se ven los datos que vienen de las APIs, facilitando su uso en la aplicación.
   - **tmdb**: Modelos específicos de la API de TheMovieDB (TMDB).
     - `credits_response.dart`: Representación de los créditos de una película individual obtenida de la API de TMDB.
