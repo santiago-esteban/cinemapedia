@@ -1,3 +1,4 @@
+//* Importa las librerías y clases necesarias.
 import 'dart:async';
 
 import 'package:animate_do/animate_do.dart';
