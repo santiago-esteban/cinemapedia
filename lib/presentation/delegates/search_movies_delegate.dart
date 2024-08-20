@@ -11,14 +11,14 @@ typedef SearchMoviesCallback = Future<List<Movie>> Function(String query);
 
 //* Delegate personalizado para la búsqueda de películas en la aplicación.
 class SearchMoviesDelegate extends SearchDelegate<Movie?> {
-  final SearchMoviesCallback searchMovies; // Referencia a la función para realizar la búsqueda de películas.
-  List<Movie> initialMovies; // Lista inicial de películas que se mostrará antes de realizar la búsqueda.
+  final SearchMoviesCallback searchMovies;
+  List<Movie> initialMovies;
 
   //* Controladores de stream para manejar el estado de carga y las películas encontradas.
   StreamController<List<Movie>> debouncedMoviesStream = StreamController.broadcast();
   StreamController<bool> isLoadingStream = StreamController.broadcast();
 
-  Timer? _debouncedTimer; // Temporizador para implementar el debounce en las búsquedas.
+  Timer? _debouncedTimer;
 
   //* Constructor que inicializa la función de búsqueda y las películas iniciales.
   SearchMoviesDelegate({
@@ -28,24 +28,24 @@ class SearchMoviesDelegate extends SearchDelegate<Movie?> {
 
   @override
   void dispose() {
-    _debouncedTimer?.cancel(); // Cancela el temporizador si está activo.
-    debouncedMoviesStream.close(); // Cierra el StreamController de películas.
-    isLoadingStream.close(); // Cierra el StreamController de carga.
+    _debouncedTimer?.cancel();
+    debouncedMoviesStream.close();
+    isLoadingStream.close();
     super.dispose();
   }
 
   //* Método que maneja los cambios en la consulta de búsqueda.
   void _onQueryChanged(String query) {
-    if (query.isNotEmpty) isLoadingStream.add(true); // Muestra el indicador de carga si la consulta no está vacía.
+    if (query.isNotEmpty) isLoadingStream.add(true);
     if (_debouncedTimer?.isActive ?? false) {
-      _debouncedTimer!.cancel(); // Cancela el temporizador anterior si está activo.
+      _debouncedTimer!.cancel();
     }
-    // Configura un nuevo temporizador para retrasar la búsqueda y reducir la cantidad de solicitudes HTTP.
+    //* Configura un nuevo temporizador para retrasar la búsqueda y reducir la cantidad de solicitudes HTTP.
     _debouncedTimer = Timer(const Duration(milliseconds: 500), () async {
-      final movies = await searchMovies(query); // Realiza la búsqueda de películas.
-      initialMovies = movies; // Actualiza las películas iniciales.
-      debouncedMoviesStream.add(movies); // Agrega las películas encontradas al stream.
-      isLoadingStream.add(false); // Oculta el indicador de carga.
+      final movies = await searchMovies(query);
+      initialMovies = movies;
+      debouncedMoviesStream.add(movies);
+      isLoadingStream.add(false);
     });
   }
 
@@ -83,10 +83,10 @@ class SearchMoviesDelegate extends SearchDelegate<Movie?> {
     //* Construye el botón para cerrar el search delegate.
     return IconButton(
       onPressed: () {
-        close(context, null); // Cierra la búsqueda y pasa null como resultado.
-        _debouncedTimer?.cancel(); // Cancela el temporizador.
-        isLoadingStream.close(); // Cierra el stream de carga.
-        debouncedMoviesStream.close(); // Cierra el stream de películas.
+        close(context, null);
+        _debouncedTimer?.cancel();
+        isLoadingStream.close();
+        debouncedMoviesStream.close();
       },
       icon: const Icon(Icons.arrow_back_ios_new_rounded),
     );
@@ -108,25 +108,24 @@ class SearchMoviesDelegate extends SearchDelegate<Movie?> {
 
 //* Widget para construir la lista de películas usando un StreamBuilder.
 class _StreamBuilder extends StatelessWidget {
-  // Constructor del widget que recibe la lista inicial de películas y el StreamController.
   const _StreamBuilder({
     required this.initialMovies,
     required this.debouncedMoviesStream,
   });
 
-  final List<Movie> initialMovies; // Lista de películas que se mostrará inicialmente antes de que se actualice con los datos del stream.
-  final StreamController<List<Movie>> debouncedMoviesStream; // Controlador de flujo que proporciona las películas actualizadas basadas en la consulta de búsqueda.
+  final List<Movie> initialMovies;
+  final StreamController<List<Movie>> debouncedMoviesStream;
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      initialData: initialMovies, // Establece la lista inicial de películas como datos iniciales del StreamBuilder.
-      stream: debouncedMoviesStream.stream, // Proporciona el flujo de datos de películas que el StreamBuilder escuchará.
+      initialData: initialMovies,
+      stream: debouncedMoviesStream.stream,
       builder: (context, snapshot) {
-        final movies = snapshot.data ?? []; // Obtiene las películas del snapshot de datos del stream. Si no hay datos, usa una lista vacía.
+        final movies = snapshot.data ?? [];
         return ListView.builder(
-          itemCount: movies.length, // Construye la lista de películas con el número de ítems determinado por la longitud de la lista de películas.
-          itemBuilder: (context, index) => _MovieItem(movie: movies[index]), // Construye cada ítem de película utilizando el widget _MovieItem.
+          itemCount: movies.length,
+          itemBuilder: (context, index) => _MovieItem(movie: movies[index]),
         );
       },
     );
@@ -135,17 +134,17 @@ class _StreamBuilder extends StatelessWidget {
 
 //* Widget para construir un ítem de película individual en la lista.
 class _MovieItem extends StatelessWidget {
-  final Movie movie; // Película que se mostrará en este ítem.
+  final Movie movie;
 
-  const _MovieItem({required this.movie}); // Constructor que recibe una instancia de Movie.
+  const _MovieItem({required this.movie});
 
   @override
   Widget build(BuildContext context) {
-    final textStyles = Theme.of(context).textTheme; // Obtiene los estilos de texto del tema actual.
-    final size = MediaQuery.of(context).size; // Obtiene el tamaño de la pantalla para ajustar el diseño.
+    final textStyles = Theme.of(context).textTheme;
+    final size = MediaQuery.of(context).size;
 
     return GestureDetector(
-      onTap: () => context.go('/home/0/movie/${movie.id}'), // Navega a la página individual de la película al tocar el ítem.
+      onTap: () => context.go('/home/0/movie/${movie.id}'),
       child: FadeIn(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -153,9 +152,9 @@ class _MovieItem extends StatelessWidget {
             children: [
               //* Imagen de la película
               SizedBox(
-                width: size.width * 0.2, // Define el ancho del contenedor de la imagen.
+                width: size.width * 0.2,
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10), // Redondea las esquinas de la imagen.
+                  borderRadius: BorderRadius.circular(10),
                   child: FadeInImage(
                     height: 130,
                     fit: BoxFit.cover,
@@ -165,28 +164,24 @@ class _MovieItem extends StatelessWidget {
                 ),
               ),
 
-              const SizedBox(width: 10), // Espacio entre la imagen y la descripción.
+              const SizedBox(width: 10),
 
               //* Descripción de la película
               SizedBox(
-                width: size.width * 0.7, // Define el ancho del contenedor de la descripción.
+                width: size.width * 0.7,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start, // Alinea el texto al principio de la columna.
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     //* Título y descripción breve
-                    Text(movie.title, style: textStyles.titleMedium), // Muestra el título de la película con el estilo definido.
-                    // Muestra una descripción breve de la película. Si es demasiado larga, la trunca y añade "..." al final.
+                    Text(movie.title, style: textStyles.titleMedium),
                     (movie.overview.length > 100) ? Text('${movie.overview.substring(0, 100)}...') : Text(movie.overview),
 
                     //* Estrella y valoraciones
                     Row(
                       children: [
-                        Icon(Icons.star_half_rounded, color: Colors.yellow.shade800), // Muestra un ícono de estrella para las valoraciones.
-                        const SizedBox(width: 5), // Espacio entre la estrella y la calificación.
-                        Text(
-                          Formats.number(movie.voteAverage, 1), // Muestra la calificación de la película formateada.
-                          style: textStyles.bodyMedium!.copyWith(color: Colors.yellow.shade900),
-                        )
+                        Icon(Icons.star_half_rounded, color: Colors.yellow.shade800),
+                        const SizedBox(width: 5),
+                        Text(Formats.number(movie.voteAverage, 1), style: textStyles.bodyMedium!.copyWith(color: Colors.yellow.shade900))
                       ],
                     )
                   ],
