@@ -1,7 +1,9 @@
+//* Importaciones de paquetes necesarios.
 import 'package:cinemapedia/presentation/presentation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+//* Vista de la pantalla de películas populares.
 class PopularView extends ConsumerStatefulWidget {
   const PopularView({super.key});
 
@@ -9,6 +11,7 @@ class PopularView extends ConsumerStatefulWidget {
   PopularViewState createState() => PopularViewState();
 }
 
+//* Clase PopularViewState que maneja el estado de PopularView. Usa AutomaticKeepAliveClientMixin para mantener el estado.
 class PopularViewState extends ConsumerState<PopularView> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
@@ -20,8 +23,12 @@ class PopularViewState extends ConsumerState<PopularView> with AutomaticKeepAliv
       return const Center(child: CircularProgressIndicator(strokeWidth: 2));
     }
 
+    //* El widget MovieMasonry muestra las películas populares.
     return Scaffold(
-      body: MovieMasonry(loadNextPage: () => ref.read(popularMoviesProvider.notifier).loadNextPage(), movies: popularMovies),
+      body: MovieMasonry(
+        loadNextPage: () => ref.read(popularMoviesProvider.notifier).loadNextPage(),
+        movies: popularMovies,
+      ),
     );
   }
 

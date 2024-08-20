@@ -1,14 +1,15 @@
-//* Vista principal dentro de la pantalla de inicio.
+//* Importaciones de paquetes necesarios.
 import 'package:cinemapedia/config/config.dart';
-import 'package:cinemapedia/presentation/presentation.dart'; // Importa los proveedores de estado.
-import 'package:flutter/material.dart'; // Importa los widgets de Flutter.
-import 'package:flutter_riverpod/flutter_riverpod.dart'; // Importa Riverpod para la gestión del estado.
+import 'package:cinemapedia/presentation/presentation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+//* Vista de la pantalla de inicio.
 class HomeView extends ConsumerStatefulWidget {
-  const HomeView({super.key}); // Constructor.
+  const HomeView({super.key});
 
   @override
-  HomeViewState createState() => HomeViewState(); // Crea el estado asociado con esta vista.
+  HomeViewState createState() => HomeViewState();
 }
 
 //* Estado para manejar la lógica y la interfaz de HomeView.
@@ -16,7 +17,7 @@ class HomeViewState extends ConsumerState<HomeView> with AutomaticKeepAliveClien
   @override
   void initState() {
     super.initState();
-    // Carga la primera página de cada lista de películas al inicializar el estado.
+    //* Carga la primera página de cada lista de películas al inicializar el estado.
     ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
     ref.read(upcomingMoviesProvider.notifier).loadNextPage();
     ref.read(popularMoviesProvider.notifier).loadNextPage();
@@ -26,48 +27,49 @@ class HomeViewState extends ConsumerState<HomeView> with AutomaticKeepAliveClien
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    final screenLoader = ref.watch(screenLoaderProvider); // Verifica si es la primera carga de datos.
-    if (screenLoader) return const CustomScreenLoader(); // Muestra un cargador a pantalla completa si los datos aún están cargándose.
+    final screenLoader = ref.watch(screenLoaderProvider);
+    if (screenLoader) return const CustomScreenLoader();
 
-    final slideShowMovies = ref.watch(moviesSlideshowProvider); // Obtiene las películas para el carrusel.
-    final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider); // Obtiene las películas actualmente en cartelera.
-    final upcomingMovies = ref.watch(upcomingMoviesProvider); // Obtiene las películas próximas a estrenarse.
-    final topRatedMovies = ref.watch(topRatedMoviesProvider); // Obtiene las películas mejor calificadas.
+    //* Observa las películas desde los proveedores.
+    final slideShowMovies = ref.watch(moviesSlideshowProvider);
+    final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
+    final upcomingMovies = ref.watch(upcomingMoviesProvider);
+    final topRatedMovies = ref.watch(topRatedMoviesProvider);
 
     return CustomScrollView(
       slivers: [
         const SliverAppBar(
-          floating: true, // Mantiene la AppBar flotante.
-          flexibleSpace: CustomAppbar(), // Barra de aplicación personalizada.
+          floating: true,
+          flexibleSpace: CustomAppbar(),
         ),
         SliverList(
           delegate: SliverChildBuilderDelegate(
             (context, index) {
               return Column(
                 children: [
-                  //* Carrusel de 6 peliculas
-                  MoviesSlideshow(movies: slideShowMovies), // Muestra el carrusel de películas.
+                  //* Carrusel de 10 peliculas
+                  MoviesSlideshow(movies: slideShowMovies),
 
                   //* Listas de películas "infinitas".
                   MoviesListview(
-                    movies: nowPlayingMovies, // Lista de películas en cartelera.
+                    movies: nowPlayingMovies,
                     title: 'En cines',
                     subTitle: Formats.formatDate(DateTime.now()),
-                    loadNextPage: () => ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(), // Función para cargar más películas al final.
+                    loadNextPage: () => ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(),
                   ),
                   MoviesListview(
-                    movies: upcomingMovies, // Lista de películas próximas.
+                    movies: upcomingMovies,
                     title: 'Próximamente',
                     subTitle: 'Este mes',
                     loadNextPage: () => ref.read(upcomingMoviesProvider.notifier).loadNextPage(),
                   ),
                   MoviesListview(
-                    movies: topRatedMovies, // Lista de películas mejor calificadas.
+                    movies: topRatedMovies,
                     title: 'Mejor calificadas',
                     subTitle: 'Desde siempre',
                     loadNextPage: () => ref.read(topRatedMoviesProvider.notifier).loadNextPage(),
                   ),
-                  const SizedBox(height: 20) // Espaciado al final de la lista.
+                  const SizedBox(height: 20)
                 ],
               );
             },
