@@ -71,7 +71,7 @@ Actúa como intermediario entre la interfaz de usuario y los repositorios. Tambi
 
 ## INFRASTRUCTURE: Implementación de las funciones para obtener los datos
 
-- **datasources**: Aquí está ubicado el código que conecta con las APIs o las bases de datos.
+- **datasources**: Aquí está ubicado el código que conecta con las APIs y bases de datos.
   - `actor_datasource_impl.dart`: Código que obtiene los actores desde una API con peticiones HTTP.
   - `isar_datasource_impl.dart`: Código que maneja los datos de Isar Database, una base de datos local.
   - `movie_datasource_impl.dart`: Código que obtiene las películas desde una API con peticiones HTTP.
@@ -95,7 +95,7 @@ Actúa como intermediario entre la interfaz de usuario y los repositorios. Tambi
 ## PRESENTATION: Parte visual y su conexión con los datos
 
 - **delegates**: Maneja la búsqueda dentro de la aplicación.
-  - `search_movies_delegate.dart`: Código para buscar películas.
+  - `search_movies_delegate.dart`: Código para buscar películas por su título.
 - **providers**: Enlace entre la infraestructura y la presentación.
   - **actors**: Gestión de la información de los actores.
     - `actors_provider.dart`: Obtiene y maneja la lista de actores por película.
