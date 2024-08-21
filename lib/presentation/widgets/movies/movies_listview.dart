@@ -1,15 +1,16 @@
-import 'package:animate_do/animate_do.dart'; // Importa animate_do para animaciones.
-import 'package:cinemapedia/domain/domain.dart'; // Importa la entidad Movie.
+//* Importaciones necesarias para el funcionamiento del widget y animaciones
+import 'package:animate_do/animate_do.dart';
+import 'package:cinemapedia/domain/domain.dart';
 import 'package:cinemapedia/presentation/presentation.dart';
-import 'package:flutter/material.dart'; // Importa widgets básicos de Flutter.
-import 'package:go_router/go_router.dart'; // Importa go_router para la navegación.
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-//* Widget que muestra una lista horizontal de películas con título y subtítulo opcionales.
+//* Muestra una lista horizontal de películas con título y subtítulo opcionales
 class MoviesListview extends StatefulWidget {
-  final List<Movie> movies; // Lista de películas a mostrar.
-  final String? title; // Título opcional.
-  final String? subTitle; // Subtítulo opcional.
-  final VoidCallback? loadNextPage; // Callback opcional para cargar más películas al llegar al final de la lista.
+  final List<Movie> movies;
+  final String? title;
+  final String? subTitle;
+  final VoidCallback? loadNextPage;
 
   const MoviesListview({
     super.key,
@@ -19,48 +20,50 @@ class MoviesListview extends StatefulWidget {
     this.loadNextPage,
   });
 
+  //* Crea el estado asociado con este widget
   @override
-  State<MoviesListview> createState() => _MoviesListviewState(); // Crea el estado asociado con este widget.
+  State<MoviesListview> createState() => _MoviesListviewState();
 }
 
 class _MoviesListviewState extends State<MoviesListview> {
-  final scrollController = ScrollController(); // Controlador para el desplazamiento horizontal de la lista.
+  final scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
-    //* Añade un listener para detectar cuando el usuario llega al final de la lista y cargar más datos si es necesario.
+    //* Añade un listener para detectar cuando el usuario llega al final de la lista y cargar más datos si es necesario
     scrollController.addListener(() {
       if (widget.loadNextPage == null) return;
       if ((scrollController.position.pixels + 200) >= scrollController.position.maxScrollExtent) {
-        widget.loadNextPage!(); // Llama al callback para cargar más datos.
+        widget.loadNextPage!(); //* Llama al callback para cargar más datos
       }
     });
   }
 
+  //* Libera recursos del controlador al destruir el widget
   @override
   void dispose() {
-    scrollController.dispose(); // Libera recursos del controlador al destruir el widget.
+    scrollController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 350, // Altura del contenedor de la lista.
+      height: 350,
       child: Column(
         children: [
-          //* Encabezado del list view.
+          //* Encabezado del list view
           if (widget.title != null || widget.subTitle != null) _TitleCustomWidget(title: widget.title, subTitle: widget.subTitle),
           Expanded(
             child: ListView.builder(
-              controller: scrollController, // Asigna el controlador de desplazamiento a la lista.
-              itemCount: widget.movies.length, // Número de elementos en la lista.
-              scrollDirection: Axis.horizontal, // Desplazamiento horizontal.
-              physics: const BouncingScrollPhysics(), // Física de desplazamiento con rebote.
+              controller: scrollController,
+              itemCount: widget.movies.length,
+              scrollDirection: Axis.horizontal,
+              physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) {
-                //* Contenido del list view (Imagen, título de la película y valoraciones).
-                return FadeInRight(child: _SlideCustomWidget(movie: widget.movies[index])); // Anima cada elemento con FadeInRight.
+                //* Contenido del list view: imagen, título de la película y valoraciones
+                return FadeInRight(child: _SlideCustomWidget(movie: widget.movies[index]));
               },
             ),
           ),
@@ -70,54 +73,49 @@ class _MoviesListviewState extends State<MoviesListview> {
   }
 }
 
-//* Widget que muestra el encabezado para el list view de la lista de películas.
+//* Widget que muestra el encabezado para el list view de la lista de películas
 class _TitleCustomWidget extends StatelessWidget {
-  final String? title; // Título opcional.
-  final String? subTitle; // Subtítulo opcional.
+  final String? title;
+  final String? subTitle;
 
-  const _TitleCustomWidget({this.title, this.subTitle}); // Constructor con título y subtítulo opcionales.
+  const _TitleCustomWidget({this.title, this.subTitle});
 
   @override
   Widget build(BuildContext context) {
-    final titleStyle = Theme.of(context).textTheme.titleLarge; // Estilo del título del tema.
+    final titleStyle = Theme.of(context).textTheme.titleLarge;
 
     return Container(
-      padding: const EdgeInsets.only(top: 10), // Padding superior para el título.
-      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 3), // Margen horizontal alrededor del contenedor del título.
+      padding: const EdgeInsets.only(top: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
       child: Row(
         children: [
           //* Título (En cines, próximamente...)
-          if (title != null) Text(title!, style: titleStyle), // Muestra el título si está disponible.
-          const Spacer(), // Espacio flexible para alinear el subtítulo a la derecha.
+          if (title != null) Text(title!, style: titleStyle),
+          const Spacer(),
           //* Subtítulo (Sábado 10, este mes...)
-          if (subTitle != null)
-            FilledButton.tonal(
-              onPressed: () {}, // Acción cuando se toca el subtítulo.
-              style: const ButtonStyle(visualDensity: VisualDensity.compact), // Estilo compacto para el botón.
-              child: Text(subTitle!), // Muestra el subtítulo en el botón.
-            ),
+          if (subTitle != null) FilledButton.tonal(onPressed: () {}, style: const ButtonStyle(visualDensity: VisualDensity.compact), child: Text(subTitle!)),
         ],
       ),
     );
   }
 }
 
-//* Widget que representa un elemento de la lista de películas, incluyendo imagen, título y calificación.
+//* Widget que representa un elemento de la lista de películas, incluyendo imagen, título y calificación
 class _SlideCustomWidget extends StatelessWidget {
-  final Movie movie; // Película para mostrar.
+  final Movie movie;
 
-  const _SlideCustomWidget({required this.movie}); // Constructor con película requerida.
+  const _SlideCustomWidget({required this.movie});
 
   @override
   Widget build(BuildContext context) {
-    final textStyles = Theme.of(context).textTheme; // Obtiene los estilos de texto del tema.
+    final textStyles = Theme.of(context).textTheme;
 
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 8), // Margen horizontal alrededor de cada elemento.
+      margin: const EdgeInsets.symmetric(horizontal: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          //* Imagen de la película.
+          //* Imagen de la película
           SizedBox(
             width: 150,
             child: ClipRRect(
@@ -127,7 +125,9 @@ class _SlideCustomWidget extends StatelessWidget {
                 child: FadeInImage(
                   height: 220,
                   fit: BoxFit.cover,
+                  //* Gif de carga
                   placeholder: const AssetImage('assets/loaders/bottle-loader.gif'),
+                  //* Imagen de la película
                   image: NetworkImage(movie.posterPath),
                 ),
               ),
@@ -136,17 +136,10 @@ class _SlideCustomWidget extends StatelessWidget {
 
           const SizedBox(height: 5),
 
-          //* Título de la película.
-          SizedBox(
-            width: 150, // Ancho del contenedor del título.
-            child: Text(
-              movie.title, // Título de la película.
-              maxLines: 2, // Máximo de dos líneas para el título.
-              style: textStyles.titleSmall, // Estilo del texto del título.
-            ),
-          ),
+          //* Título de la película
+          SizedBox(width: 150, child: Text(movie.title, maxLines: 2, style: textStyles.titleSmall)),
 
-          //* Calificación y popularidad de la película.
+          //* Calificación y popularidad de la película
           MovieRating(voteAverage: movie.voteAverage),
         ],
       ),
