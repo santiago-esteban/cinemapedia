@@ -14,7 +14,7 @@ class FavoriteMoviesNotifier extends StateNotifier<Map<int, Movie>> {
   int page = 0;
   final IsarRepository isarRepository;
 
-  FavoriteMoviesNotifier({required this.isarRepository}) : super({}); //* Inicializa el estado con un mapa vacío
+  FavoriteMoviesNotifier({required this.isarRepository}) : super({});
 
   //* Carga la siguiente página de películas favoritas desde el repositorio
   Future<List<Movie>> loadNextPage() async {

@@ -24,7 +24,7 @@ class SearchedMoviesNotifier extends StateNotifier<List<Movie>> {
   SearchedMoviesNotifier({
     required this.searchMovies,
     required this.ref,
-  }) : super([]); // Inicializa el estado con una lista vacía.
+  }) : super([]);
 
   //* Método para buscar películas basado en la consulta proporcionada.
   Future<List<Movie>> searchMoviesByQuery(String query) async {

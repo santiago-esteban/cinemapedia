@@ -1,25 +1,26 @@
+//* Importaciones de paquetes necesarios.
 import 'package:cinemapedia/domain/domain.dart';
 import 'package:cinemapedia/presentation/presentation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-//* Proveedor de estado para manejar la información de películas.
+//* Proveedor de estado que gestiona la información de detalles de películas
 final movieDetailsProvider = StateNotifierProvider<MovieMapNotifier, Map<String, Movie>>((ref) {
-  final movieRepository = ref.watch(movieRepositoryProvider).getMovieById; // Obtiene la función getMovieById del repositorio de películas.
-  return MovieMapNotifier(movieRepository); // Crea una instancia de MovieMapNotifier con la función getMovieById.
+  final movieRepository = ref.watch(movieRepositoryProvider).getMovieById;
+  return MovieMapNotifier(movieRepository);
 });
 
-typedef GetMovieCallBack = Future<Movie> Function(String movieId); // Callback para obtener una película dado un ID.
+typedef GetMovieCallBack = Future<Movie> Function(String movieId); //* Definición del callback para obtener una película por ID
 
-//* Clase que maneja el estado de las películas.
+//* Notifier que maneja el estado de las películas en un mapa
 class MovieMapNotifier extends StateNotifier<Map<String, Movie>> {
-  final GetMovieCallBack getMovie; // Función de callback para obtener una película basada en el ID.
+  final GetMovieCallBack getMovie;
 
-  MovieMapNotifier(this.getMovie) : super({}); // Constructor que inicializa el estado con un mapa vacío.
+  MovieMapNotifier(this.getMovie) : super({});
 
-  //* Método para cargar la información de una película específica.
+  //* Carga la información de una película específica si no está ya en el estado
   Future<void> loadMovie({required String movieId}) async {
-    if (state[movieId] != null) return; // Verifica si la película ya está en el estado.
-    final movie = await getMovie(movieId); // Obtiene la película llamando a la función getMovie.
-    state = {...state, movieId: movie}; // Actualiza el estado con la película obtenida.
+    if (state[movieId] != null) return;
+    final movie = await getMovie(movieId);
+    state = {...state, movieId: movie}; //* Actualiza el estado con la nueva película
   }
 }

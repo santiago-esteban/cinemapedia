@@ -1,49 +1,51 @@
+//* Importaciones de paquetes necesarios.
 import 'package:cinemapedia/domain/domain.dart';
 import 'package:cinemapedia/presentation/presentation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-//* Proveedor de estado para manejar la lista de películas que se están reproduciendo actualmente.
+//* Proveedor para películas que se están reproduciendo actualmente
 final nowPlayingMoviesProvider = StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) {
-  final fetchMoreMovies = ref.watch(movieRepositoryProvider).getNowPlaying; // Obtiene la función getNowPlaying del repositorio de películas.
-  return MoviesNotifier(fetchMoreMovies: fetchMoreMovies); // Crea una instancia de MoviesNotifier con la función getNowPlaying.
+  final fetchMoreMovies = ref.watch(movieRepositoryProvider).getNowPlaying;
+  return MoviesNotifier(fetchMoreMovies: fetchMoreMovies);
 });
 
-//* Proveedor de estado para manejar la lista de películas próximas a estrenarse.
+//* Proveedor para películas próximas a estrenarse
 final upcomingMoviesProvider = StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) {
-  final fetchMoreMovies = ref.watch(movieRepositoryProvider).getUpcoming; // Obtiene la función getUpcoming del repositorio de películas.
-  return MoviesNotifier(fetchMoreMovies: fetchMoreMovies); // Crea una instancia de MoviesNotifier con la función getUpcoming.
+  final fetchMoreMovies = ref.watch(movieRepositoryProvider).getUpcoming;
+  return MoviesNotifier(fetchMoreMovies: fetchMoreMovies);
 });
 
-//* Proveedor de estado para manejar la lista de películas populares.
+//* Proveedor para películas populares
 final popularMoviesProvider = StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) {
-  final fetchMoreMovies = ref.watch(movieRepositoryProvider).getPopular; // Obtiene la función getPopular del repositorio de películas.
-  return MoviesNotifier(fetchMoreMovies: fetchMoreMovies); // Crea una instancia de MoviesNotifier con la función getPopular.
+  final fetchMoreMovies = ref.watch(movieRepositoryProvider).getPopular;
+  return MoviesNotifier(fetchMoreMovies: fetchMoreMovies);
 });
 
-//* Proveedor de estado para manejar la lista de películas mejor valoradas.
+//* Proveedor para películas mejor valoradas
 final topRatedMoviesProvider = StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) {
-  final fetchMoreMovies = ref.watch(movieRepositoryProvider).getTopRated; // Obtiene la función getTopRated del repositorio de películas.
-  return MoviesNotifier(fetchMoreMovies: fetchMoreMovies); // Crea una instancia de MoviesNotifier con la función getTopRated.
+  final fetchMoreMovies = ref.watch(movieRepositoryProvider).getTopRated;
+  return MoviesNotifier(fetchMoreMovies: fetchMoreMovies);
 });
 
-typedef MovieCallback = Future<List<Movie>> Function({int page}); // Callback para obtener una lista de películas dado un número de página.
+//* Función para obtener una lista de películas dado un número de página
+typedef MovieCallback = Future<List<Movie>> Function({int page});
 
-//* Clase que maneja el estado de la lista de películas, incluyendo la carga de más páginas.
+//* Clase que maneja el estado de la lista de películas, incluyendo la lógica para cargar más páginas
 class MoviesNotifier extends StateNotifier<List<Movie>> {
-  int currentPage = 0; // Página actual para la carga de más películas.
-  bool isLoading = false; // Indica si se está cargando más contenido.
-  MovieCallback fetchMoreMovies; // Función de callback para obtener más películas.
+  int currentPage = 0;
+  bool isLoading = false;
+  MovieCallback fetchMoreMovies;
 
-  MoviesNotifier({required this.fetchMoreMovies}) : super([]); // Constructor que inicializa el estado con una lista vacía.
+  MoviesNotifier({required this.fetchMoreMovies}) : super([]);
 
-  //* Método para cargar la siguiente página de películas.
+  //* Método para cargar la siguiente página de películas
   Future<void> loadNextPage() async {
-    if (isLoading) return; // Evita la carga si ya se está cargando.
-    isLoading = true; // Marca como cargando.
-    currentPage++; // Incrementa el número de página.
-    final List<Movie> movies = await fetchMoreMovies(page: currentPage); // Obtiene las películas de la página actual.
-    state = [...state, ...movies]; // Actualiza el estado con las nuevas películas.
-    await Future.delayed(const Duration(milliseconds: 300)); // Retrasa la carga.
-    isLoading = false; // Marca como no cargando.
+    if (isLoading) return;
+    isLoading = true;
+    currentPage++;
+    final List<Movie> movies = await fetchMoreMovies(page: currentPage); //* Obtiene las películas de la siguiente página
+    state = [...state, ...movies]; //* Actualiza el estado con las nuevas películas
+    await Future.delayed(const Duration(milliseconds: 300)); //* Retrasa la carga para simular una transición suave
+    isLoading = false;
   }
 }
