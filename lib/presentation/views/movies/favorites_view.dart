@@ -50,7 +50,7 @@ class FavoritesViewState extends ConsumerState<FavoritesView> with AutomaticKeep
             //* Elementos mostrados en la pantalla cuando no hay películas favoritas.
             Icon(Icons.favorite_outline_sharp, size: 60, color: colors.primary),
             Text('¡Ohh no!', style: TextStyle(fontSize: 30, color: colors.primary)),
-            const Text('¡No tienes películas favoritas!', style: TextStyle(fontSize: 20, color: Colors.black45)),
+            Text('¡No tienes películas favoritas!', style: TextStyle(fontSize: 20, color: colors.primary)),
             const SizedBox(height: 20),
             FilledButton.tonal(onPressed: () => context.go('/home/0'), child: const Text('Buscar mis favoritas')),
           ],
